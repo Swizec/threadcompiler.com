@@ -1,19 +1,40 @@
 import React, { useContext, useEffect, useState } from 'react'
 import remark from 'remark'
 import utf8 from 'remark-utf8'
-import html from 'remark-html'
+import styled from 'styled-components'
 
 import { ThreadContainer } from '../state'
 
-const ThreadRender = () => {
-  const { input } = useContext(ThreadContainer.Context)
+const TweetStyle = styled.div`
+  font-size: 27px;
+  line-height: 32px;
+  letter-spacing: 0.01em;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  max-width: 560px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  color: #14171a;
+  margin-bottom: 1.5em;
+`
+
+const CharCountStyle = styled.div`
+  font-size: 17px;
+  text-align: right;
+`
+
+const CharCount = ({ value }) => {
+  return <CharCountStyle>{280 - value.length}</CharCountStyle>
+}
+
+const Tweet = ({ value }) => {
   const [rendered, setRendered] = useState('')
 
   useEffect(
     () => {
       remark()
         .use(utf8)
-        .process(input, (err, output) => {
+        .process(value, (err, output) => {
           if (err) {
             console.error(err)
           } else {
@@ -21,12 +42,27 @@ const ThreadRender = () => {
           }
         })
     },
-    [input]
+    [value]
   )
 
-  console.log(rendered)
+  return (
+    <TweetStyle>
+      {rendered}
+      <CharCount value={rendered} />
+    </TweetStyle>
+  )
+}
 
-  return <div>{rendered}</div>
+const ThreadRender = () => {
+  const { input } = useContext(ThreadContainer.Context)
+
+  return (
+    <>
+      {input.split('---').map(tweet => (
+        <Tweet value={tweet} />
+      ))}
+    </>
+  )
 }
 
 export default ThreadRender
