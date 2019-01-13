@@ -19,6 +19,8 @@
         "react-dom": "next",
         "react-helmet": "^5.2.0",
         "reakit": "^0.15.13",
+        "remark": "^10.0.1",
+        "remark-html": "^9.0.0",
         "remark-utf8": "^1.1.0",
         "styled-components": "^4.1.3"
     },

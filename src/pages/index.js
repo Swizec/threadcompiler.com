@@ -5,6 +5,8 @@ import Layout from '../components/layout'
 import Image from '../components/image'
 import SEO from '../components/seo'
 import ThreadInput from '../components/ThreadInput'
+import ThreadRender from '../components/ThreadRender'
+
 import { ThreadContainer } from '../state'
 
 const TwoColumn = styled.div`
@@ -34,6 +36,7 @@ const IndexPage = () => (
         </div>
         <div>
           <h2>Your twitter thread 👇</h2>
+          <ThreadRender />
         </div>
       </ThreadContainer.Provider>
     </TwoColumn>
