@@ -5,6 +5,7 @@ import Layout from '../components/layout'
 import Image from '../components/image'
 import SEO from '../components/seo'
 import ThreadInput from '../components/ThreadInput'
+import { ThreadContainer } from '../state'
 
 const TwoColumn = styled.div`
   display: grid;
@@ -26,13 +27,15 @@ const IndexPage = () => (
       <li>Click post</li>
     </ol>
     <TwoColumn>
-      <div>
-        <h2>Write markdown here ✍️</h2>
-        <ThreadInput />
-      </div>
-      <div>
-        <h2>Your twitter thread 👇</h2>
-      </div>
+      <ThreadContainer.Provider>
+        <div>
+          <h2>Write markdown here ✍️</h2>
+          <ThreadInput />
+        </div>
+        <div>
+          <h2>Your twitter thread 👇</h2>
+        </div>
+      </ThreadContainer.Provider>
     </TwoColumn>
     <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
       <Image />

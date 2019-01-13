@@ -3037,6 +3037,11 @@ constate@^0.9.0:
   resolved "https://registry.yarnpkg.com/constate/-/constate-0.9.0.tgz#877197ef8fbcacee95672a7e98f7b21dec818891"
   integrity sha512-Cgkqefi4GrepnA7gwqbrsU+Kf/xl0sPv3O1UNE/vUZtTgpWlkd+/rSZjjd7npICtExn6yuICro7Vb2zoFCnS/A==
 
+constate@next:
+  version "1.0.0-alpha.6"
+  resolved "https://registry.yarnpkg.com/constate/-/constate-1.0.0-alpha.6.tgz#b3af6a9fbb521820508d90bab8a2ce3d170e3c83"
+  integrity sha512-UdQzNDIYsulpJ0EBMDKiyT8yTLEzIPdFNX3YlJF/Kqtj+sPsLbb0ZsxQ1LW5zW4unc0w7+F4NHffV39Rd22E5g==
+
 contains-path@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/contains-path/-/contains-path-0.1.0.tgz#fe8cf184ff6670b6baef01a9d4861a5cbec4120a"

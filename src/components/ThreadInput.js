@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { styled, Input } from 'reakit'
+import { ThreadContainer } from '../state'
 
 const Textarea = styled(Input)`
   width: 100%;
@@ -12,15 +13,9 @@ const Textarea = styled(Input)`
 `
 
 const ThreadInput = () => {
-  const [input, setInput] = useState('')
+  const { input, update } = useContext(ThreadContainer.Context)
 
-  return (
-    <Textarea
-      as="textarea"
-      value={input}
-      onChange={event => setInput(event.target.value)}
-    />
-  )
+  return <Textarea as="textarea" value={input} onChange={update} />
 }
 
 export default ThreadInput
