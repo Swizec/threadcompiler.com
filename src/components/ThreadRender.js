@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import remark from 'remark'
 import utf8 from 'remark-utf8'
+import codeScreenshot from 'remark-code-screenshot'
 import styled from 'styled-components'
 
 import { ThreadContainer } from '../state'
@@ -34,6 +35,7 @@ const Tweet = ({ value }) => {
     () => {
       remark()
         .use(utf8)
+        .use(codeScreenshot)
         .process(value, (err, output) => {
           if (err) {
             console.error(err)
