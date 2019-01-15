@@ -2,6 +2,7 @@ import React from 'react'
 import { ClipLoader } from 'react-spinners'
 
 import Auth from '../Auth/Auth'
+import Layout from '../components/layout'
 
 const auth = new Auth()
 
@@ -16,4 +17,4 @@ const Auth0CallbackPage = () => (
   </Layout>
 )
 
-export default IndexPage
+export default Auth0CallbackPage

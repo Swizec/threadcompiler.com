@@ -20,7 +20,7 @@
         "react-dom": "next",
         "react-helmet": "^5.2.0",
         "react-spinners": "^0.5.1",
-        "reakit": "^0.15.13",
+        "reakit": "next",
         "remark": "^10.0.1",
         "remark-code-screenshot": "^1.0.0",
         "remark-html": "^9.0.0",

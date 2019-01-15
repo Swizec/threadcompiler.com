@@ -48,7 +48,8 @@ export default class Auth {
     this.expiresAt = expiresAt
 
     // navigate to the home route
-    navigate('/')
+    // should use navigate()
+    window.location.href = 'http://localhost:8000'
   }
 
   renewSession = () => {
@@ -75,7 +76,8 @@ export default class Auth {
     localStorage.removeItem('isLoggedIn')
 
     // navigate to the home route
-    navigate('/')
+    // should use navigate()
+    window.location.href = 'http://localhost:8000'
   }
 
   isAuthenticated = () => {

@@ -9,6 +9,7 @@ import ThreadInput from '../components/ThreadInput'
 import ThreadRender from '../components/ThreadRender'
 
 import { ThreadContainer } from '../state'
+import Login from '../components/Login'
 
 const TwoColumn = styled.div`
   display: grid;
@@ -22,7 +23,7 @@ const IndexPage = () => (
   <Layout>
     <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
     <h1>Write your best Twitter thread</h1>
-    <button onClick={() => auth.login()}>Login</button>
+    <Login auth={auth} />
     <p>Here's how it works 👇</p>
     <ol>
       <li>Write markdown</li>
