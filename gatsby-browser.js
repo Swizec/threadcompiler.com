@@ -8,9 +8,9 @@
 
 const Auth = require('./src/Auth/Auth').default
 
-console.log(Auth)
-
 exports.onClientEntry = () => {
+    const auth = new Auth();
+    console.log("HELLO", auth);
     if (localStorage.getItem('isLoggedIn') === 'true') {
         const auth = new Auth()
         auth.renewSession();

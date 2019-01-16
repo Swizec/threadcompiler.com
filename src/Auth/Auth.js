@@ -20,6 +20,7 @@ export default class Auth {
 
   handleAuthentication = () => {
     this.auth0.parseHash((err, authResult) => {
+      console.log('AUTH RESULT', this.auth0, err, authResult)
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.setSession(authResult)
       } else if (err) {
@@ -48,8 +49,7 @@ export default class Auth {
     this.expiresAt = expiresAt
 
     // navigate to the home route
-    // should use navigate()
-    window.location.href = 'http://localhost:8000'
+    navigate('/app')
   }
 
   renewSession = () => {
@@ -77,7 +77,7 @@ export default class Auth {
 
     // navigate to the home route
     // should use navigate()
-    window.location.href = 'http://localhost:8000'
+    navigate('/app')
   }
 
   isAuthenticated = () => {

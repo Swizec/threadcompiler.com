@@ -60,8 +60,8 @@ const ThreadRender = () => {
 
   return (
     <>
-      {input.split('---').map(tweet => (
-        <Tweet value={tweet} />
+      {input.split('---').map((tweet, i) => (
+        <Tweet value={tweet} key={i} />
       ))}
     </>
   )
