@@ -22,6 +22,7 @@ export default class Auth {
     this.auth0.parseHash((err, authResult) => {
       console.log('AUTH RESULT', this.auth0, err, authResult)
       if (authResult && authResult.accessToken && authResult.idToken) {
+        console.log('NO ERROR')
         this.setSession(authResult)
       } else if (err) {
         console.log(err)
@@ -54,6 +55,7 @@ export default class Auth {
 
   renewSession = () => {
     this.auth0.checkSession({}, (err, authResult) => {
+      console.log('RENEWING', err, authResult)
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.setSession(authResult)
       } else if (err) {

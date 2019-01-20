@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import Auth from '../Auth/Auth'
+import Auth from '../utils/auth'
 
 import Layout from '../components/layout'
 import Image from '../components/image'
