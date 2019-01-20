@@ -1,5 +1,5 @@
 import auth0 from 'auth0-js'
-import { navigateTo } from 'gatsby-link'
+import { navigate } from 'gatsby-link'
 
 const AUTH0_DOMAIN = 'threadcompiler.auth0.com'
 const AUTH0_CLIENT_ID = 'qFnKgffxd1egZwn4FaTqCD17x4XuBDDJ'
@@ -14,26 +14,20 @@ export default class Auth {
     scope: 'openid profile email',
   })
 
-  constructor() {
-    this.login = this.login.bind(this)
-    this.logout = this.logout.bind(this)
-    this.handleAuthentication = this.handleAuthentication.bind(this)
-    this.isAuthenticated = this.isAuthenticated.bind(this)
-  }
-
-  login() {
+  login = () => {
     this.auth0.authorize()
   }
 
-  logout() {
+  logout = () => {
     localStorage.removeItem('access_token')
     localStorage.removeItem('id_token')
     localStorage.removeItem('expires_at')
     localStorage.removeItem('user')
   }
 
-  handleAuthentication() {
+  handleAuthentication = () => {
     if (typeof window !== 'undefined') {
+      // this must've been the trick
       this.auth0.parseHash((err, authResult) => {
         if (authResult && authResult.accessToken && authResult.idToken) {
           this.setSession(authResult)
@@ -42,17 +36,17 @@ export default class Auth {
         }
 
         // Return to the homepage after authentication.
-        navigateTo('/')
+        navigate('/')
       })
     }
   }
 
-  isAuthenticated() {
+  isAuthenticated = () => {
     const expiresAt = JSON.parse(localStorage.getItem('expires_at'))
     return new Date().getTime() < expiresAt
   }
 
-  setSession(authResult) {
+  setSession = authResult => {
     const expiresAt = JSON.stringify(
       authResult.expiresIn * 1000 + new Date().getTime()
     )
@@ -65,13 +59,13 @@ export default class Auth {
     })
   }
 
-  getUser() {
+  getUser = () => {
     if (localStorage.getItem('user')) {
       return JSON.parse(localStorage.getItem('user'))
     }
   }
 
-  getUserName() {
+  getUserName = () => {
     if (this.getUser()) {
       return this.getUser().name
     }
