@@ -1,91 +1,79 @@
 import auth0 from 'auth0-js'
-import { navigate } from 'gatsby'
+import { navigateTo } from 'gatsby-link'
+
+const AUTH0_DOMAIN = 'threadcompiler.auth0.com'
+const AUTH0_CLIENT_ID = 'qFnKgffxd1egZwn4FaTqCD17x4XuBDDJ'
 
 export default class Auth {
-  accessToken
-  idToken
-  expiresAt
-
   auth0 = new auth0.WebAuth({
-    domain: 'threadcompiler.auth0.com',
-    clientID: 'qFnKgffxd1egZwn4FaTqCD17x4XuBDDJ',
+    domain: AUTH0_DOMAIN,
+    clientID: AUTH0_CLIENT_ID,
     redirectUri: 'http://localhost:8000/auth0_callback',
+    audience: `https://${AUTH0_DOMAIN}/api/v2/`,
     responseType: 'token id_token',
-    scope: 'openid',
+    scope: 'openid profile email',
   })
 
-  login = () => {
+  constructor() {
+    this.login = this.login.bind(this)
+    this.logout = this.logout.bind(this)
+    this.handleAuthentication = this.handleAuthentication.bind(this)
+    this.isAuthenticated = this.isAuthenticated.bind(this)
+  }
+
+  login() {
     this.auth0.authorize()
   }
 
-  handleAuthentication = () => {
-    this.auth0.parseHash((err, authResult) => {
-      console.log('AUTH RESULT', this.auth0, err, authResult)
-      if (authResult && authResult.accessToken && authResult.idToken) {
-        console.log('NO ERROR')
-        this.setSession(authResult)
-      } else if (err) {
-        console.log(err)
-        alert(`Error: ${err.error}. Check the console for further details.`)
-      }
-    })
+  logout() {
+    localStorage.removeItem('access_token')
+    localStorage.removeItem('id_token')
+    localStorage.removeItem('expires_at')
+    localStorage.removeItem('user')
   }
 
-  getAccessToken = () => {
-    return this.accessToken
+  handleAuthentication() {
+    if (typeof window !== 'undefined') {
+      this.auth0.parseHash((err, authResult) => {
+        if (authResult && authResult.accessToken && authResult.idToken) {
+          this.setSession(authResult)
+        } else if (err) {
+          console.log(err)
+        }
+
+        // Return to the homepage after authentication.
+        navigateTo('/')
+      })
+    }
   }
 
-  getIdToken = () => {
-    return this.idToken
-  }
-
-  setSession = authResult => {
-    // Set isLoggedIn flag in localStorage
-    localStorage.setItem('isLoggedIn', 'true')
-
-    // Set the time that the access token will expire at
-    let expiresAt = authResult.expiresIn * 1000 + new Date().getTime()
-    this.accessToken = authResult.accessToken
-    this.idToken = authResult.idToken
-    this.expiresAt = expiresAt
-
-    // navigate to the home route
-    navigate('/app')
-  }
-
-  renewSession = () => {
-    this.auth0.checkSession({}, (err, authResult) => {
-      console.log('RENEWING', err, authResult)
-      if (authResult && authResult.accessToken && authResult.idToken) {
-        this.setSession(authResult)
-      } else if (err) {
-        this.logout()
-        console.log(err)
-        alert(
-          `Could not get a new token (${err.error}: ${err.error_description}).`
-        )
-      }
-    })
-  }
-
-  logout = () => {
-    // Remove tokens and expiry time
-    this.accessToken = null
-    this.idToken = null
-    this.expiresAt = 0
-
-    // Remove isLoggedIn flag from localStorage
-    localStorage.removeItem('isLoggedIn')
-
-    // navigate to the home route
-    // should use navigate()
-    navigate('/app')
-  }
-
-  isAuthenticated = () => {
-    // Check whether the current time is past the
-    // access token's expiry time
-    let expiresAt = this.expiresAt
+  isAuthenticated() {
+    const expiresAt = JSON.parse(localStorage.getItem('expires_at'))
     return new Date().getTime() < expiresAt
+  }
+
+  setSession(authResult) {
+    const expiresAt = JSON.stringify(
+      authResult.expiresIn * 1000 + new Date().getTime()
+    )
+    localStorage.setItem('access_token', authResult.accessToken)
+    localStorage.setItem('id_token', authResult.idToken)
+    localStorage.setItem('expires_at', expiresAt)
+
+    this.auth0.client.userInfo(authResult.accessToken, (err, user) => {
+      localStorage.setItem('user', JSON.stringify(user))
+    })
+  }
+
+  getUser() {
+    if (localStorage.getItem('user')) {
+      return JSON.parse(localStorage.getItem('user'))
+    }
+  }
+
+  getUserName() {
+    if (this.getUser()) {
+      return this.getUser().name
+    }
   }
 }
