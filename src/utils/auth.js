@@ -74,4 +74,8 @@ export default class Auth {
       return this.getUser().name
     }
   }
+
+  getToken = () => {
+    return localStorage.getItem('id_token')
+  }
 }

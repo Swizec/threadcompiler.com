@@ -28,7 +28,20 @@ export default () => {
     setMessage(data.message)
   }
 
-  const callPrivate = async () => {}
+  const callPrivate = async () => {
+    const token = auth.getToken()
+
+    const res = await fetch(PRIVATE_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    const data = await res.json()
+
+    console.log(data)
+    setMessage(data.message)
+  }
 
   return (
     <div>
