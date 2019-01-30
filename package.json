@@ -15,6 +15,7 @@
         "gatsby-plugin-sharp": "^2.0.14",
         "gatsby-source-filesystem": "^2.0.8",
         "gatsby-transformer-sharp": "^2.1.8",
+        "jsonwebtoken": "^8.4.0",
         "prop-types": "^15.6.2",
         "react": "next",
         "react-dom": "next",
