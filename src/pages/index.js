@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import Auth from '../utils/auth'
 
 import Layout from '../components/layout'
 import Image from '../components/image'
@@ -17,13 +16,11 @@ const TwoColumn = styled.div`
   grid-gap: 10px;
 `
 
-const auth = new Auth()
-
 const IndexPage = () => (
   <Layout>
     <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
     <h1>Write your best Twitter thread</h1>
-    <Login auth={auth} />
+    <Login />
     <p>Here's how it works 👇</p>
     <ol>
       <li>Write markdown</li>

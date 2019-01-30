@@ -1,5 +1,5 @@
 import auth0 from 'auth0-js'
-import { navigate } from 'gatsby-link'
+import { navigate } from 'gatsby'
 
 const AUTH0_DOMAIN = 'threadcompiler.auth0.com'
 const AUTH0_CLIENT_ID = 'qFnKgffxd1egZwn4FaTqCD17x4XuBDDJ'

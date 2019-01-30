@@ -1,7 +1,10 @@
 import React from 'react'
 import { Button } from 'reakit'
+import Auth from '../utils/Auth'
 
-const Login = ({ auth }) => {
+const auth = new Auth()
+
+const Login = () => {
   const { isAuthenticated } = auth
 
   if (isAuthenticated()) {
