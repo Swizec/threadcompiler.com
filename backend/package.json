@@ -1,0 +1,14 @@
+{
+    "name": "threadcompiler.com-backend",
+    "private": true,
+    "description": "Backend for threadcompiler.com",
+    "version": "0.1.0",
+    "author": "Swizec Teller <swizec@swize.com>",
+    "dependencies": {
+        "jsonwebtoken": "^8.4.0"
+    },
+    "devDependencies": {
+        "serverless-offline": "^4.2.0"
+    },
+    "license": "MIT"
+}

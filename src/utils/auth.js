@@ -3,6 +3,10 @@ import { navigate } from 'gatsby'
 
 const AUTH0_DOMAIN = 'threadcompiler.auth0.com'
 const AUTH0_CLIENT_ID = 'qFnKgffxd1egZwn4FaTqCD17x4XuBDDJ'
+export const PUBLIC_ENDPOINT =
+  'https://2x2vvyzhh5.execute-api.us-west-2.amazonaws.com/dev/api/public'
+export const PRIVATE_ENDPOINT =
+  'https://2x2vvyzhh5.execute-api.us-west-2.amazonaws.com/dev/api/private'
 
 export default class Auth {
   auth0 = new auth0.WebAuth({

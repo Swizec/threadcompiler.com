@@ -20,7 +20,9 @@ const IndexPage = () => (
   <Layout>
     <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
     <h1>Write your best Twitter thread</h1>
+
     <Login />
+
     <p>Here's how it works 👇</p>
     <ol>
       <li>Write markdown</li>

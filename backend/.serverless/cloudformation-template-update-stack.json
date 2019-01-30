@@ -1,0 +1,711 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "The AWS CloudFormation template for this Serverless application",
+  "Resources": {
+    "ServerlessDeploymentBucket": {
+      "Type": "AWS::S3::Bucket"
+    },
+    "AuthLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/aws-custom-authorizer-auth0-dev-auth"
+      }
+    },
+    "PublicEndpointLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/aws-custom-authorizer-auth0-dev-publicEndpoint"
+      }
+    },
+    "PrivateEndpointLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/aws-custom-authorizer-auth0-dev-privateEndpoint"
+      }
+    },
+    "IamRoleLambdaExecution": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": [
+                  "lambda.amazonaws.com"
+                ]
+              },
+              "Action": [
+                "sts:AssumeRole"
+              ]
+            }
+          ]
+        },
+        "Policies": [
+          {
+            "PolicyName": {
+              "Fn::Join": [
+                "-",
+                [
+                  "dev",
+                  "aws-custom-authorizer-auth0",
+                  "lambda"
+                ]
+              ]
+            },
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "logs:CreateLogStream"
+                  ],
+                  "Resource": [
+                    {
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/aws-custom-authorizer-auth0-dev-auth:*"
+                    },
+                    {
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/aws-custom-authorizer-auth0-dev-publicEndpoint:*"
+                    },
+                    {
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/aws-custom-authorizer-auth0-dev-privateEndpoint:*"
+                    }
+                  ]
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "logs:PutLogEvents"
+                  ],
+                  "Resource": [
+                    {
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/aws-custom-authorizer-auth0-dev-auth:*:*"
+                    },
+                    {
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/aws-custom-authorizer-auth0-dev-publicEndpoint:*:*"
+                    },
+                    {
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/aws-custom-authorizer-auth0-dev-privateEndpoint:*:*"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "Path": "/",
+        "RoleName": {
+          "Fn::Join": [
+            "-",
+            [
+              "aws-custom-authorizer-auth0",
+              "dev",
+              "us-west-2",
+              "lambdaRole"
+            ]
+          ]
+        }
+      }
+    },
+    "AuthLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/aws-custom-authorizer-auth0/dev/1548833217616-2019-01-30T07:26:57.616Z/aws-custom-authorizer-auth0.zip"
+        },
+        "FunctionName": "aws-custom-authorizer-auth0-dev-auth",
+        "Handler": "handler.auth",
+        "MemorySize": 1024,
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        },
+        "Runtime": "nodejs6.10",
+        "Timeout": 6,
+        "Environment": {
+          "Variables": {
+            "AUTH0_CLIENT_ID": "qFnKgffxd1egZwn4FaTqCD17x4XuBDDJ",
+            "AUTH0_CLIENT_PUBLIC_KEY": "-----BEGIN CERTIFICATE-----\r\nMIIDCzCCAfOgAwIBAgIJY7bABD60laE/MA0GCSqGSIb3DQEBCwUAMCMxITAfBgNV\r\nBAMTGHRocmVhZGNvbXBpbGVyLmF1dGgwLmNvbTAeFw0xOTAxMTUwMDIwNDZaFw0z\r\nMjA5MjMwMDIwNDZaMCMxITAfBgNVBAMTGHRocmVhZGNvbXBpbGVyLmF1dGgwLmNv\r\nbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKg7kphD+mXP1CZODPtZ\r\nggYWISkKC4tbhYzJm6mKR/vAM61lK5CEkhCAy5WeMWqKLgMyyOIPQ7h7E05v3db/\r\nSr6CnN2AMdbVhN2y4RWVgunYfEXRd7kNnTM+o9/zCECm7pClIGiiO/UfqOIe/l5X\r\nC/v6Drocvauk+53psHVa184BjHm/romTEMcNE1szbDBjrEm0WIwkh7536TMTtP4S\r\n594kqCXDqOVmus1ufyBjgxNNheGD2HCODwNNwktsUc1uDjJ7WULm+w2NY1MdwWdY\r\nteFkaCSO0vOWYjoifNknXz8EJZyX0DzlfbY/KxCM3MEbKnRcUSuwhguzrnTMM9mI\r\nlncCAwEAAaNCMEAwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUdTbKafloYtze\r\nKkkMlHlqK6+tXQEwDgYDVR0PAQH/BAQDAgKEMA0GCSqGSIb3DQEBCwUAA4IBAQCh\r\nIZbi8CgI6myvml093PZhINmNBgFcqjXjDtcmaHcEV6Pijr2w20xVbo6j7GQu3cDJ\r\n862TBMMwVmgFETxq8Tr/ADiZHWN6m3so1O4WNz2RNH1rgzWiTwUrwA1pSsVQpta+\r\neQ45bubpC9wzrbku50Uu0VaZsBAMZKxvx8D6EItANeEzYlUdNyDdzcaijWL1YVnJ\r\nRFxpQKo1ie46bnmGumMH/AgeJaWryaeBvMZGo7wSVFQcPk+SEZOjdxlaaEkqzdPW\r\nq34xFU3Ldskl4zxfxHHsMwS58v0AUkcukT+BSC95puRdcADoRl9Htg035M+KmQsZ\r\ndS++M+W/B7YV9QlIeQVO\r\n-----END CERTIFICATE-----"
+          }
+        }
+      },
+      "DependsOn": [
+        "AuthLogGroup",
+        "IamRoleLambdaExecution"
+      ]
+    },
+    "AuthLambdaVersiona0fjD30k4j21TYHCAZNgDO4hq5171FdEr6eCup1kKlY": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "AuthLambdaFunction"
+        },
+        "CodeSha256": "lrxVXvrpd0z4OWgqzaEXjMI0RxNqY95lhCWr3jFOLho="
+      }
+    },
+    "PublicEndpointLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/aws-custom-authorizer-auth0/dev/1548833217616-2019-01-30T07:26:57.616Z/aws-custom-authorizer-auth0.zip"
+        },
+        "FunctionName": "aws-custom-authorizer-auth0-dev-publicEndpoint",
+        "Handler": "handler.publicEndpoint",
+        "MemorySize": 1024,
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        },
+        "Runtime": "nodejs6.10",
+        "Timeout": 6,
+        "Environment": {
+          "Variables": {
+            "AUTH0_CLIENT_ID": "qFnKgffxd1egZwn4FaTqCD17x4XuBDDJ",
+            "AUTH0_CLIENT_PUBLIC_KEY": "-----BEGIN CERTIFICATE-----\r\nMIIDCzCCAfOgAwIBAgIJY7bABD60laE/MA0GCSqGSIb3DQEBCwUAMCMxITAfBgNV\r\nBAMTGHRocmVhZGNvbXBpbGVyLmF1dGgwLmNvbTAeFw0xOTAxMTUwMDIwNDZaFw0z\r\nMjA5MjMwMDIwNDZaMCMxITAfBgNVBAMTGHRocmVhZGNvbXBpbGVyLmF1dGgwLmNv\r\nbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKg7kphD+mXP1CZODPtZ\r\nggYWISkKC4tbhYzJm6mKR/vAM61lK5CEkhCAy5WeMWqKLgMyyOIPQ7h7E05v3db/\r\nSr6CnN2AMdbVhN2y4RWVgunYfEXRd7kNnTM+o9/zCECm7pClIGiiO/UfqOIe/l5X\r\nC/v6Drocvauk+53psHVa184BjHm/romTEMcNE1szbDBjrEm0WIwkh7536TMTtP4S\r\n594kqCXDqOVmus1ufyBjgxNNheGD2HCODwNNwktsUc1uDjJ7WULm+w2NY1MdwWdY\r\nteFkaCSO0vOWYjoifNknXz8EJZyX0DzlfbY/KxCM3MEbKnRcUSuwhguzrnTMM9mI\r\nlncCAwEAAaNCMEAwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUdTbKafloYtze\r\nKkkMlHlqK6+tXQEwDgYDVR0PAQH/BAQDAgKEMA0GCSqGSIb3DQEBCwUAA4IBAQCh\r\nIZbi8CgI6myvml093PZhINmNBgFcqjXjDtcmaHcEV6Pijr2w20xVbo6j7GQu3cDJ\r\n862TBMMwVmgFETxq8Tr/ADiZHWN6m3so1O4WNz2RNH1rgzWiTwUrwA1pSsVQpta+\r\neQ45bubpC9wzrbku50Uu0VaZsBAMZKxvx8D6EItANeEzYlUdNyDdzcaijWL1YVnJ\r\nRFxpQKo1ie46bnmGumMH/AgeJaWryaeBvMZGo7wSVFQcPk+SEZOjdxlaaEkqzdPW\r\nq34xFU3Ldskl4zxfxHHsMwS58v0AUkcukT+BSC95puRdcADoRl9Htg035M+KmQsZ\r\ndS++M+W/B7YV9QlIeQVO\r\n-----END CERTIFICATE-----"
+          }
+        }
+      },
+      "DependsOn": [
+        "PublicEndpointLogGroup",
+        "IamRoleLambdaExecution"
+      ]
+    },
+    "PublicEndpointLambdaVersionGEK9fulvU8c2jYl42xwwQrBWufg3bdImTjxnitJWAw": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "PublicEndpointLambdaFunction"
+        },
+        "CodeSha256": "lrxVXvrpd0z4OWgqzaEXjMI0RxNqY95lhCWr3jFOLho="
+      }
+    },
+    "PrivateEndpointLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/aws-custom-authorizer-auth0/dev/1548833217616-2019-01-30T07:26:57.616Z/aws-custom-authorizer-auth0.zip"
+        },
+        "FunctionName": "aws-custom-authorizer-auth0-dev-privateEndpoint",
+        "Handler": "handler.privateEndpoint",
+        "MemorySize": 1024,
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        },
+        "Runtime": "nodejs6.10",
+        "Timeout": 6,
+        "Environment": {
+          "Variables": {
+            "AUTH0_CLIENT_ID": "qFnKgffxd1egZwn4FaTqCD17x4XuBDDJ",
+            "AUTH0_CLIENT_PUBLIC_KEY": "-----BEGIN CERTIFICATE-----\r\nMIIDCzCCAfOgAwIBAgIJY7bABD60laE/MA0GCSqGSIb3DQEBCwUAMCMxITAfBgNV\r\nBAMTGHRocmVhZGNvbXBpbGVyLmF1dGgwLmNvbTAeFw0xOTAxMTUwMDIwNDZaFw0z\r\nMjA5MjMwMDIwNDZaMCMxITAfBgNVBAMTGHRocmVhZGNvbXBpbGVyLmF1dGgwLmNv\r\nbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKg7kphD+mXP1CZODPtZ\r\nggYWISkKC4tbhYzJm6mKR/vAM61lK5CEkhCAy5WeMWqKLgMyyOIPQ7h7E05v3db/\r\nSr6CnN2AMdbVhN2y4RWVgunYfEXRd7kNnTM+o9/zCECm7pClIGiiO/UfqOIe/l5X\r\nC/v6Drocvauk+53psHVa184BjHm/romTEMcNE1szbDBjrEm0WIwkh7536TMTtP4S\r\n594kqCXDqOVmus1ufyBjgxNNheGD2HCODwNNwktsUc1uDjJ7WULm+w2NY1MdwWdY\r\nteFkaCSO0vOWYjoifNknXz8EJZyX0DzlfbY/KxCM3MEbKnRcUSuwhguzrnTMM9mI\r\nlncCAwEAAaNCMEAwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUdTbKafloYtze\r\nKkkMlHlqK6+tXQEwDgYDVR0PAQH/BAQDAgKEMA0GCSqGSIb3DQEBCwUAA4IBAQCh\r\nIZbi8CgI6myvml093PZhINmNBgFcqjXjDtcmaHcEV6Pijr2w20xVbo6j7GQu3cDJ\r\n862TBMMwVmgFETxq8Tr/ADiZHWN6m3so1O4WNz2RNH1rgzWiTwUrwA1pSsVQpta+\r\neQ45bubpC9wzrbku50Uu0VaZsBAMZKxvx8D6EItANeEzYlUdNyDdzcaijWL1YVnJ\r\nRFxpQKo1ie46bnmGumMH/AgeJaWryaeBvMZGo7wSVFQcPk+SEZOjdxlaaEkqzdPW\r\nq34xFU3Ldskl4zxfxHHsMwS58v0AUkcukT+BSC95puRdcADoRl9Htg035M+KmQsZ\r\ndS++M+W/B7YV9QlIeQVO\r\n-----END CERTIFICATE-----"
+          }
+        }
+      },
+      "DependsOn": [
+        "PrivateEndpointLogGroup",
+        "IamRoleLambdaExecution"
+      ]
+    },
+    "PrivateEndpointLambdaVersionWSJZI8UQrF508Y8gePd58c0NgJ7P1lhoJkLsO0HoUg": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "PrivateEndpointLambdaFunction"
+        },
+        "CodeSha256": "lrxVXvrpd0z4OWgqzaEXjMI0RxNqY95lhCWr3jFOLho="
+      }
+    },
+    "ApiGatewayRestApi": {
+      "Type": "AWS::ApiGateway::RestApi",
+      "Properties": {
+        "Name": "dev-aws-custom-authorizer-auth0",
+        "EndpointConfiguration": {
+          "Types": [
+            "EDGE"
+          ]
+        }
+      }
+    },
+    "ApiGatewayResourceApi": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Fn::GetAtt": [
+            "ApiGatewayRestApi",
+            "RootResourceId"
+          ]
+        },
+        "PathPart": "api",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceApiPublic": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceApi"
+        },
+        "PathPart": "public",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceApiPrivate": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceApi"
+        },
+        "PathPart": "private",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayMethodApiPublicOptions": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "MethodResponses": [
+          {
+            "StatusCode": "200",
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true,
+              "method.response.header.Access-Control-Allow-Credentials": true
+            },
+            "ResponseModels": {}
+          }
+        ],
+        "RequestParameters": {},
+        "Integration": {
+          "Type": "MOCK",
+          "RequestTemplates": {
+            "application/json": "{statusCode:200}"
+          },
+          "ContentHandling": "CONVERT_TO_TEXT",
+          "IntegrationResponses": [
+            {
+              "StatusCode": "200",
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST'",
+                "method.response.header.Access-Control-Allow-Credentials": "'false'"
+              },
+              "ResponseTemplates": {
+                "application/json": ""
+              }
+            }
+          ]
+        },
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceApiPublic"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayMethodApiPrivateOptions": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "MethodResponses": [
+          {
+            "StatusCode": "200",
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true,
+              "method.response.header.Access-Control-Allow-Credentials": true
+            },
+            "ResponseModels": {}
+          }
+        ],
+        "RequestParameters": {},
+        "Integration": {
+          "Type": "MOCK",
+          "RequestTemplates": {
+            "application/json": "{statusCode:200}"
+          },
+          "ContentHandling": "CONVERT_TO_TEXT",
+          "IntegrationResponses": [
+            {
+              "StatusCode": "200",
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST'",
+                "method.response.header.Access-Control-Allow-Credentials": "'false'"
+              },
+              "ResponseTemplates": {
+                "application/json": ""
+              }
+            }
+          ]
+        },
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceApiPrivate"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayMethodApiPublicPost": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "POST",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceApiPublic"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "PublicEndpointLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      }
+    },
+    "ApiGatewayMethodApiPrivatePost": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "POST",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceApiPrivate"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "CUSTOM",
+        "AuthorizerId": {
+          "Ref": "AuthApiGatewayAuthorizer"
+        },
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "PrivateEndpointLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      },
+      "DependsOn": "AuthApiGatewayAuthorizer"
+    },
+    "AuthApiGatewayAuthorizer": {
+      "Type": "AWS::ApiGateway::Authorizer",
+      "Properties": {
+        "IdentitySource": "method.request.header.Authorization",
+        "Name": "auth",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "AuthorizerUri": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":apigateway:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":lambda:path/2015-03-31/functions/",
+              {
+                "Fn::GetAtt": [
+                  "AuthLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "/invocations"
+            ]
+          ]
+        },
+        "Type": "TOKEN"
+      }
+    },
+    "ApiGatewayDeployment1548833217634": {
+      "Type": "AWS::ApiGateway::Deployment",
+      "Properties": {
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "StageName": "dev"
+      },
+      "DependsOn": [
+        "ApiGatewayMethodApiPublicOptions",
+        "ApiGatewayMethodApiPrivateOptions",
+        "ApiGatewayMethodApiPublicPost",
+        "ApiGatewayMethodApiPrivatePost"
+      ]
+    },
+    "PublicEndpointLambdaPermissionApiGateway": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "PublicEndpointLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": {
+          "Fn::Join": [
+            "",
+            [
+              "apigateway.",
+              {
+                "Ref": "AWS::URLSuffix"
+              }
+            ]
+          ]
+        },
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      }
+    },
+    "PrivateEndpointLambdaPermissionApiGateway": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "PrivateEndpointLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": {
+          "Fn::Join": [
+            "",
+            [
+              "apigateway.",
+              {
+                "Ref": "AWS::URLSuffix"
+              }
+            ]
+          ]
+        },
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      }
+    },
+    "AuthLambdaPermissionApiGateway": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "AuthLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": {
+          "Fn::Join": [
+            "",
+            [
+              "apigateway.",
+              {
+                "Ref": "AWS::URLSuffix"
+              }
+            ]
+          ]
+        }
+      }
+    },
+    "GatewayResponse": {
+      "Type": "AWS::ApiGateway::GatewayResponse",
+      "Properties": {
+        "ResponseParameters": {
+          "gatewayresponse.header.Access-Control-Allow-Origin": "'*'",
+          "gatewayresponse.header.Access-Control-Allow-Headers": "'*'"
+        },
+        "ResponseType": "EXPIRED_TOKEN",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "StatusCode": "401"
+      }
+    },
+    "AuthFailureGatewayResponse": {
+      "Type": "AWS::ApiGateway::GatewayResponse",
+      "Properties": {
+        "ResponseParameters": {
+          "gatewayresponse.header.Access-Control-Allow-Origin": "'*'",
+          "gatewayresponse.header.Access-Control-Allow-Headers": "'*'"
+        },
+        "ResponseType": "UNAUTHORIZED",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "StatusCode": "401"
+      }
+    }
+  },
+  "Outputs": {
+    "ServerlessDeploymentBucketName": {
+      "Value": {
+        "Ref": "ServerlessDeploymentBucket"
+      }
+    },
+    "AuthLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "AuthLambdaVersiona0fjD30k4j21TYHCAZNgDO4hq5171FdEr6eCup1kKlY"
+      }
+    },
+    "PublicEndpointLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "PublicEndpointLambdaVersionGEK9fulvU8c2jYl42xwwQrBWufg3bdImTjxnitJWAw"
+      }
+    },
+    "PrivateEndpointLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "PrivateEndpointLambdaVersionWSJZI8UQrF508Y8gePd58c0NgJ7P1lhoJkLsO0HoUg"
+      }
+    },
+    "ServiceEndpoint": {
+      "Description": "URL of the service endpoint",
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            "https://",
+            {
+              "Ref": "ApiGatewayRestApi"
+            },
+            ".execute-api.us-west-2.",
+            {
+              "Ref": "AWS::URLSuffix"
+            },
+            "/dev"
+          ]
+        ]
+      }
+    }
+  }
+}
