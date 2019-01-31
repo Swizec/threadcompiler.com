@@ -22,6 +22,7 @@
         "react-helmet": "^5.2.0",
         "react-spinners": "^0.5.1",
         "reakit": "next",
+        "reakit-theme-default": "^0.1.12",
         "remark": "^10.0.1",
         "remark-code-screenshot": "^1.0.0",
         "remark-html": "^9.0.0",
