@@ -81,17 +81,117 @@ module.exports.publicEndpoint = (event, context, callback) =>
     }),
   })
 
-// Private API
-module.exports.privateEndpoint = (event, context, callback) =>
-  callback(null, {
-    statusCode: 200,
-    headers: {
-      /* Required for CORS support to work */
-      'Access-Control-Allow-Origin': '*',
-      /* Required for cookies, authorization headers with HTTPS */
-      'Access-Control-Allow-Credentials': true,
-    },
-    body: JSON.stringify({
-      message: 'Hi ⊂◉‿◉つ from Private API. Only logged in users can see this',
-    }),
+const request = require('request')
+
+function getAuth0Token() {
+  return new Promise((resolve, reject) => {
+    request(
+      {
+        method: 'POST',
+        url: 'https://threadcompiler.auth0.com/oauth/token',
+        headers: { 'content-type': 'application/json' },
+        body:
+          '{"client_id":"u52yBEMCsXbQtRJcpYWvmBHLb3fa7CmL","client_secret":"YEil53VlNVpBVttEOpGlPU8wPM3aQqAC5lnW2u9IYErUjyyC0Tk0Axn9gPjvOWUG","audience":"https://threadcompiler.auth0.com/api/v2/","grant_type":"client_credentials"}',
+      },
+      (err, response, body) => {
+        if (err) {
+          reject(err)
+        } else {
+          resolve(body)
+        }
+      }
+    )
   })
+}
+
+function tweet(text, opts) {
+  return new Promise((resolve, reject) => {
+    console.log({
+      method: 'POST',
+      url: 'https://api.twitter.com/1.1/statuses/update.json',
+      headers: {
+        authorization: opts.auth,
+      },
+    })
+
+    request(
+      {
+        method: 'POST',
+        url: 'https://api.twitter.com/1.1/statuses/update.json',
+        headers: {
+          authorization: opts.auth,
+        },
+      },
+      (err, response, body) => {
+        console.log(err)
+        console.log(body)
+
+        if (err) {
+          reject(err)
+        } else {
+          resolve(body)
+        }
+      }
+    )
+  })
+}
+
+function getUserToken(userId, access_token, token_type) {
+  console.log('GETTING USER TOKEN', userId, access_token, token_type)
+  console.log('request with', {
+    method: 'GET',
+    url: `https://threadcompiler.auth0.com/api/v2/users/${userId}`,
+    headers: { authorization: `${token_type} ${access_token}` },
+  })
+
+  return new Promise((resolve, reject) => {
+    request(
+      {
+        method: 'GET',
+        url: `https://threadcompiler.auth0.com/api/v2/users/${userId}`,
+        headers: { authorization: `${token_type} ${access_token}` },
+      },
+      (err, response, body) => {
+        if (err) {
+          reject(err)
+        } else {
+          resolve(body)
+        }
+      }
+    )
+  })
+}
+
+// Private API
+module.exports.privateEndpoint = (event, context, callback) => {
+  //   tweet('I tweeted this from a serverless AWS Lambda ✌️', {
+  //     auth: `${token_type} ${access_token}`,
+  //   })
+  getAuth0Token()
+    .then(response => {
+      console.log('got response', JSON.stringify(response))
+      return getUserToken(
+        'twitter|15353121',
+        response.access_token,
+        response.token_type
+      )
+    })
+
+    .then(response => {
+      callback(null, {
+        statusCode: 200,
+        headers: {
+          /* Required for CORS support to work */
+          'Access-Control-Allow-Origin': '*',
+          /* Required for cookies, authorization headers with HTTPS */
+          'Access-Control-Allow-Credentials': true,
+        },
+        body: JSON.stringify({
+          message: `Hi ⊂◉‿◉つ from Private API. ${JSON.stringify(response)}`,
+        }),
+      })
+    })
+    .catch(err => {
+      callback(err)
+    })
+}
