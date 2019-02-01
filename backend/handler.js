@@ -81,102 +81,89 @@ module.exports.publicEndpoint = (event, context, callback) =>
     }),
   })
 
-const request = require('request')
+// import { get, post } from 'httpie'
+const { get, post } = require('httpie')
+const twitterAPI = require('node-twitter-api')
+const twitter = new twitterAPI({
+  consumerKey: 'tVBa6sa74Hzx2JQmoXcrvDLL7',
+  consumerSecret: 'REUokZOd1Pt1XfAgpRxAcpSDnxwjfx3PU1jmt1MVbSijhGrt0K',
+})
 
 function getAuth0Token() {
+  return post('https://threadcompiler.auth0.com/oauth/token', {
+    headers: { 'content-type': 'application/json' },
+    body: {
+      client_id: 'u52yBEMCsXbQtRJcpYWvmBHLb3fa7CmL',
+      client_secret:
+        'YEil53VlNVpBVttEOpGlPU8wPM3aQqAC5lnW2u9IYErUjyyC0Tk0Axn9gPjvOWUG',
+      audience: 'https://threadcompiler.auth0.com/api/v2/',
+      grant_type: 'client_credentials',
+    },
+  }).then(response => {
+    console.log('GOT auth token', response.statusCode, response.data)
+    return response.data
+  })
+}
+
+function tweet(text, identity) {
   return new Promise((resolve, reject) => {
-    request(
+    twitter.statuses(
+      'update',
       {
-        method: 'POST',
-        url: 'https://threadcompiler.auth0.com/oauth/token',
-        headers: { 'content-type': 'application/json' },
-        body:
-          '{"client_id":"u52yBEMCsXbQtRJcpYWvmBHLb3fa7CmL","client_secret":"YEil53VlNVpBVttEOpGlPU8wPM3aQqAC5lnW2u9IYErUjyyC0Tk0Axn9gPjvOWUG","audience":"https://threadcompiler.auth0.com/api/v2/","grant_type":"client_credentials"}',
+        status: text,
       },
-      (err, response, body) => {
+      identity.access_token,
+      identity.access_token_secret,
+      (err, data, response) => {
         if (err) {
           reject(err)
         } else {
-          resolve(body)
+          resolve(data)
         }
       }
     )
   })
 }
 
-function tweet(text, opts) {
-  return new Promise((resolve, reject) => {
-    console.log({
-      method: 'POST',
-      url: 'https://api.twitter.com/1.1/statuses/update.json',
-      headers: {
-        authorization: opts.auth,
-      },
-    })
-
-    request(
-      {
-        method: 'POST',
-        url: 'https://api.twitter.com/1.1/statuses/update.json',
-        headers: {
-          authorization: opts.auth,
-        },
-      },
-      (err, response, body) => {
-        console.log(err)
-        console.log(body)
-
-        if (err) {
-          reject(err)
-        } else {
-          resolve(body)
-        }
-      }
-    )
-  })
-}
+//   return post('https://api.twitter.com/1.1/statuses/update.json', {
+//     headers: {
+//       authorization: opts.auth,
+//     },
+//     body: {
+//       status: text,
+//     },
+//   }).then(response => {
+//     console.log('tweet response!', response.statusCode, response.data)
+//     return response.data
+//   })
 
 function getUserToken(userId, access_token, token_type) {
-  console.log('GETTING USER TOKEN', userId, access_token, token_type)
-  console.log('request with', {
-    method: 'GET',
-    url: `https://threadcompiler.auth0.com/api/v2/users/${userId}`,
+  return get(`https://threadcompiler.auth0.com/api/v2/users/${userId}`, {
     headers: { authorization: `${token_type} ${access_token}` },
-  })
-
-  return new Promise((resolve, reject) => {
-    request(
-      {
-        method: 'GET',
-        url: `https://threadcompiler.auth0.com/api/v2/users/${userId}`,
-        headers: { authorization: `${token_type} ${access_token}` },
-      },
-      (err, response, body) => {
-        if (err) {
-          reject(err)
-        } else {
-          resolve(body)
-        }
-      }
-    )
+  }).then(response => {
+    console.log('user token response', response.statusCode, response.data)
+    return response.data
   })
 }
 
 // Private API
 module.exports.privateEndpoint = (event, context, callback) => {
-  //   tweet('I tweeted this from a serverless AWS Lambda ✌️', {
-  //     auth: `${token_type} ${access_token}`,
-  //   })
   getAuth0Token()
-    .then(response => {
-      console.log('got response', JSON.stringify(response))
-      return getUserToken(
+    .then(response =>
+      getUserToken(
         'twitter|15353121',
         response.access_token,
         response.token_type
       )
-    })
+    )
+    .then(response => {
+      const identity = response.identities.find(id => id.provider === 'twitter')
 
+      return identity
+    })
+    .then(identity =>
+      tweet('I tweeted this from a serverless AWS Lambda ✌️', identity)
+    )
     .then(response => {
       callback(null, {
         statusCode: 200,
@@ -192,6 +179,7 @@ module.exports.privateEndpoint = (event, context, callback) => {
       })
     })
     .catch(err => {
+      console.log('HUGE ERROR', err)
       callback(err)
     })
 }

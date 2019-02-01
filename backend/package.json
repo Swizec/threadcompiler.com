@@ -5,8 +5,9 @@
     "version": "0.1.0",
     "author": "Swizec Teller <swizec@swize.com>",
     "dependencies": {
+        "httpie": "^1.0.1",
         "jsonwebtoken": "^8.4.0",
-        "request": "^2.88.0"
+        "node-twitter-api": "^1.8.0"
     },
     "devDependencies": {
         "serverless-offline": "^4.2.0"
