@@ -89,8 +89,9 @@ const twitter = new twitterAPI({
   consumerSecret: 'REUokZOd1Pt1XfAgpRxAcpSDnxwjfx3PU1jmt1MVbSijhGrt0K',
 })
 
-function getAuth0Token() {
-  return post('https://threadcompiler.auth0.com/oauth/token', {
+// Talk to Auth0 to get our token
+async function getAuth0Token() {
+  const response = await post('https://threadcompiler.auth0.com/oauth/token', {
     headers: { 'content-type': 'application/json' },
     body: {
       client_id: 'u52yBEMCsXbQtRJcpYWvmBHLb3fa7CmL',
@@ -99,12 +100,13 @@ function getAuth0Token() {
       audience: 'https://threadcompiler.auth0.com/api/v2/',
       grant_type: 'client_credentials',
     },
-  }).then(response => {
-    console.log('GOT auth token', response.statusCode, response.data)
-    return response.data
   })
+
+  console.log('GOT auth token', response.statusCode, response.data)
+  return response.data
 }
 
+// Send a tweet
 async function tweet(text, identity) {
   return new Promise((resolve, reject) => {
     twitter.statuses(
@@ -125,6 +127,7 @@ async function tweet(text, identity) {
   })
 }
 
+// Talk to Auth0 to get provider tokens
 async function getUserToken(userId, access_token, token_type) {
   const response = await get(
     `https://threadcompiler.auth0.com/api/v2/users/${userId}`,
@@ -136,36 +139,34 @@ async function getUserToken(userId, access_token, token_type) {
   return response.data
 }
 
-// Private API
+// Private API -- tweets stuff
 module.exports.privateEndpoint = (event, context, callback) => {
   const { user_id, message } = JSON.parse(event.body)
 
-  getAuth0Token()
-    .then(response =>
-      getUserToken(user_id, response.access_token, response.token_type)
+  try {
+    const auth0token = await getAuth0Token()
+    const userToken = await getUserToken(
+      user_id,
+      auth0token.access_token,
+      auth0token.token_type
     )
-    .then(response => {
-      const identity = response.identities.find(id => id.provider === 'twitter')
+    const identity = userToken.identities.find(id => id.provider === 'twitter')
+    const tweetResponse = await tweet(message, identity)
 
-      return identity
+    callback(null, {
+      statusCode: 200,
+      headers: {
+        /* Required for CORS support to work */
+        'Access-Control-Allow-Origin': '*',
+        /* Required for cookies, authorization headers with HTTPS */
+        'Access-Control-Allow-Credentials': true,
+      },
+      body: JSON.stringify({
+        message: tweetResponse,
+      }),
     })
-    .then(identity => tweet(message, identity))
-    .then(response => {
-      callback(null, {
-        statusCode: 200,
-        headers: {
-          /* Required for CORS support to work */
-          'Access-Control-Allow-Origin': '*',
-          /* Required for cookies, authorization headers with HTTPS */
-          'Access-Control-Allow-Credentials': true,
-        },
-        body: JSON.stringify({
-          message: `Hi ⊂◉‿◉つ from Private API. ${JSON.stringify(response)}`,
-        }),
-      })
-    })
-    .catch(err => {
-      console.log('HUGE ERROR', err)
-      callback(err)
-    })
+  } catch (err) {
+    console.error('HUGE ERROR', err)
+    callback(err)
+  }
 }
