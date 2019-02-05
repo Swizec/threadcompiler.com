@@ -9,6 +9,7 @@ import ThreadRender from '../components/ThreadRender'
 
 import { ThreadContainer } from '../state'
 import Login from '../components/Login'
+import TweetButton from '../components/TweetButton'
 
 const TwoColumn = styled.div`
   display: grid;
@@ -32,18 +33,23 @@ const IndexPage = () => (
       <li>Preview your thread</li>
       <li>Click post</li>
     </ol>
-    <TwoColumn>
-      <ThreadContainer.Provider>
+    <ThreadContainer.Provider>
+      <>
+        <TwoColumn>
+          <div>
+            <h2>Write markdown here ✍️</h2>
+            <ThreadInput />
+          </div>
+          <div>
+            <h2>Your twitter thread 👇</h2>
+            <ThreadRender />
+          </div>
+        </TwoColumn>
         <div>
-          <h2>Write markdown here ✍️</h2>
-          <ThreadInput />
+          <TweetButton />
         </div>
-        <div>
-          <h2>Your twitter thread 👇</h2>
-          <ThreadRender />
-        </div>
-      </ThreadContainer.Provider>
-    </TwoColumn>
+      </>
+    </ThreadContainer.Provider>
     <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
       <Image />
     </div>

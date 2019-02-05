@@ -125,18 +125,6 @@ function tweet(text, identity) {
   })
 }
 
-//   return post('https://api.twitter.com/1.1/statuses/update.json', {
-//     headers: {
-//       authorization: opts.auth,
-//     },
-//     body: {
-//       status: text,
-//     },
-//   }).then(response => {
-//     console.log('tweet response!', response.statusCode, response.data)
-//     return response.data
-//   })
-
 function getUserToken(userId, access_token, token_type) {
   return get(`https://threadcompiler.auth0.com/api/v2/users/${userId}`, {
     headers: { authorization: `${token_type} ${access_token}` },
@@ -148,6 +136,8 @@ function getUserToken(userId, access_token, token_type) {
 
 // Private API
 module.exports.privateEndpoint = (event, context, callback) => {
+  console.log(event)
+
   getAuth0Token()
     .then(response =>
       getUserToken(

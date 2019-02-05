@@ -6183,6 +6183,11 @@ http-signature@~1.2.0:
     jsprim "^1.2.2"
     sshpk "^1.7.0"
 
+httpie@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/httpie/-/httpie-1.1.0.tgz#f7daa2c5aad872254efd7317a1a5748037dcaf4c"
+  integrity sha512-KjtDfJhlkIpaZtLtudPQf1TO2AelyoBavcGX2VZWGl3ZpThwfMttoX19cFkja8Xd02B6L6xbZ7e0FMFGrDCy3w==
+
 https-browserify@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/https-browserify/-/https-browserify-1.0.0.tgz#ec06c10e0a34c0f2faf199f7fd7fc78fffd03c73"
