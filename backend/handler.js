@@ -105,7 +105,7 @@ function getAuth0Token() {
   })
 }
 
-function tweet(text, identity) {
+async function tweet(text, identity) {
   return new Promise((resolve, reject) => {
     twitter.statuses(
       'update',
@@ -125,35 +125,31 @@ function tweet(text, identity) {
   })
 }
 
-function getUserToken(userId, access_token, token_type) {
-  return get(`https://threadcompiler.auth0.com/api/v2/users/${userId}`, {
-    headers: { authorization: `${token_type} ${access_token}` },
-  }).then(response => {
-    console.log('user token response', response.statusCode, response.data)
-    return response.data
-  })
+async function getUserToken(userId, access_token, token_type) {
+  const response = await get(
+    `https://threadcompiler.auth0.com/api/v2/users/${userId}`,
+    {
+      headers: { authorization: `${token_type} ${access_token}` },
+    }
+  )
+  console.log('user token response', response.statusCode, response.data)
+  return response.data
 }
 
 // Private API
 module.exports.privateEndpoint = (event, context, callback) => {
-  console.log(event)
+  const { user_id, message } = JSON.parse(event.body)
 
   getAuth0Token()
     .then(response =>
-      getUserToken(
-        'twitter|15353121',
-        response.access_token,
-        response.token_type
-      )
+      getUserToken(user_id, response.access_token, response.token_type)
     )
     .then(response => {
       const identity = response.identities.find(id => id.provider === 'twitter')
 
       return identity
     })
-    .then(identity =>
-      tweet('I tweeted this from a serverless AWS Lambda ✌️', identity)
-    )
+    .then(identity => tweet(message, identity))
     .then(response => {
       callback(null, {
         statusCode: 200,

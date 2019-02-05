@@ -9,7 +9,7 @@
       "region": "us-west-2",
       "variableSyntax": "\\${([ ~:a-zA-Z0-9._'\",\\-\\/\\(\\)]+?)}",
       "name": "aws",
-      "runtime": "nodejs6.10",
+      "runtime": "nodejs8.10",
       "environment": {
         "AUTH0_CLIENT_ID": "qFnKgffxd1egZwn4FaTqCD17x4XuBDDJ",
         "AUTH0_CLIENT_PUBLIC_KEY": "-----BEGIN CERTIFICATE-----\r\nMIIDCzCCAfOgAwIBAgIJY7bABD60laE/MA0GCSqGSIb3DQEBCwUAMCMxITAfBgNV\r\nBAMTGHRocmVhZGNvbXBpbGVyLmF1dGgwLmNvbTAeFw0xOTAxMTUwMDIwNDZaFw0z\r\nMjA5MjMwMDIwNDZaMCMxITAfBgNVBAMTGHRocmVhZGNvbXBpbGVyLmF1dGgwLmNv\r\nbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKg7kphD+mXP1CZODPtZ\r\nggYWISkKC4tbhYzJm6mKR/vAM61lK5CEkhCAy5WeMWqKLgMyyOIPQ7h7E05v3db/\r\nSr6CnN2AMdbVhN2y4RWVgunYfEXRd7kNnTM+o9/zCECm7pClIGiiO/UfqOIe/l5X\r\nC/v6Drocvauk+53psHVa184BjHm/romTEMcNE1szbDBjrEm0WIwkh7536TMTtP4S\r\n594kqCXDqOVmus1ufyBjgxNNheGD2HCODwNNwktsUc1uDjJ7WULm+w2NY1MdwWdY\r\nteFkaCSO0vOWYjoifNknXz8EJZyX0DzlfbY/KxCM3MEbKnRcUSuwhguzrnTMM9mI\r\nlncCAwEAAaNCMEAwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUdTbKafloYtze\r\nKkkMlHlqK6+tXQEwDgYDVR0PAQH/BAQDAgKEMA0GCSqGSIb3DQEBCwUAA4IBAQCh\r\nIZbi8CgI6myvml093PZhINmNBgFcqjXjDtcmaHcEV6Pijr2w20xVbo6j7GQu3cDJ\r\n862TBMMwVmgFETxq8Tr/ADiZHWN6m3so1O4WNz2RNH1rgzWiTwUrwA1pSsVQpta+\r\neQ45bubpC9wzrbku50Uu0VaZsBAMZKxvx8D6EItANeEzYlUdNyDdzcaijWL1YVnJ\r\nRFxpQKo1ie46bnmGumMH/AgeJaWryaeBvMZGo7wSVFQcPk+SEZOjdxlaaEkqzdPW\r\nq34xFU3Ldskl4zxfxHHsMwS58v0AUkcukT+BSC95puRdcADoRl9Htg035M+KmQsZ\r\ndS++M+W/B7YV9QlIeQVO\r\n-----END CERTIFICATE-----"
@@ -134,7 +134,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/aws-custom-authorizer-auth0/dev/1549004301067-2019-02-01T06:58:21.067Z/aws-custom-authorizer-auth0.zip"
+                "S3Key": "serverless/aws-custom-authorizer-auth0/dev/1549348335198-2019-02-05T06:32:15.198Z/aws-custom-authorizer-auth0.zip"
               },
               "FunctionName": "aws-custom-authorizer-auth0-dev-auth",
               "Handler": "handler.auth",
@@ -145,7 +145,7 @@
                   "Arn"
                 ]
               },
-              "Runtime": "nodejs6.10",
+              "Runtime": "nodejs8.10",
               "Timeout": 6,
               "Environment": {
                 "Variables": {
@@ -159,14 +159,14 @@
               "IamRoleLambdaExecution"
             ]
           },
-          "AuthLambdaVersionfHXuHhuEsESEDh48BkNGszoSCM2uf349sLfSFlj8": {
+          "AuthLambdaVersiony3GhnFr15Se2v8ETvsxarZ4K7roWlYnWPETJq3Zcpo": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AuthLambdaFunction"
               },
-              "CodeSha256": "wumjjT3GzSkarlBZfKF+Maolaop/9Y2Z5r2GFJ5gheo="
+              "CodeSha256": "OzzdBbxAiABSBqwBcjEDai4qmOIKdmLrN9oebIv42wg="
             }
           },
           "PublicEndpointLambdaFunction": {
@@ -176,7 +176,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/aws-custom-authorizer-auth0/dev/1549004301067-2019-02-01T06:58:21.067Z/aws-custom-authorizer-auth0.zip"
+                "S3Key": "serverless/aws-custom-authorizer-auth0/dev/1549348335198-2019-02-05T06:32:15.198Z/aws-custom-authorizer-auth0.zip"
               },
               "FunctionName": "aws-custom-authorizer-auth0-dev-publicEndpoint",
               "Handler": "handler.publicEndpoint",
@@ -187,7 +187,7 @@
                   "Arn"
                 ]
               },
-              "Runtime": "nodejs6.10",
+              "Runtime": "nodejs8.10",
               "Timeout": 6,
               "Environment": {
                 "Variables": {
@@ -201,14 +201,14 @@
               "IamRoleLambdaExecution"
             ]
           },
-          "PublicEndpointLambdaVersionNkhOde0A5hrMp1Ck8qUWJ1evUvqvaaJ2FqFi1WI80": {
+          "PublicEndpointLambdaVersionjuJEpQ7Mhbi11mcProXA375BFrNmWEnwEscw9VOkTc": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "PublicEndpointLambdaFunction"
               },
-              "CodeSha256": "wumjjT3GzSkarlBZfKF+Maolaop/9Y2Z5r2GFJ5gheo="
+              "CodeSha256": "OzzdBbxAiABSBqwBcjEDai4qmOIKdmLrN9oebIv42wg="
             }
           },
           "PrivateEndpointLambdaFunction": {
@@ -218,7 +218,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/aws-custom-authorizer-auth0/dev/1549004301067-2019-02-01T06:58:21.067Z/aws-custom-authorizer-auth0.zip"
+                "S3Key": "serverless/aws-custom-authorizer-auth0/dev/1549348335198-2019-02-05T06:32:15.198Z/aws-custom-authorizer-auth0.zip"
               },
               "FunctionName": "aws-custom-authorizer-auth0-dev-privateEndpoint",
               "Handler": "handler.privateEndpoint",
@@ -229,7 +229,7 @@
                   "Arn"
                 ]
               },
-              "Runtime": "nodejs6.10",
+              "Runtime": "nodejs8.10",
               "Timeout": 6,
               "Environment": {
                 "Variables": {
@@ -243,14 +243,14 @@
               "IamRoleLambdaExecution"
             ]
           },
-          "PrivateEndpointLambdaVersion49LccyaAsBdKLKKNjJt1KjEv55j1YI5Ka2MMCiUOU": {
+          "PrivateEndpointLambdaVersionl0zRi6GYb2NMIvYQcnGvELSvCsTsgHsc8lvXnM0AsE": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "PrivateEndpointLambdaFunction"
               },
-              "CodeSha256": "wumjjT3GzSkarlBZfKF+Maolaop/9Y2Z5r2GFJ5gheo="
+              "CodeSha256": "OzzdBbxAiABSBqwBcjEDai4qmOIKdmLrN9oebIv42wg="
             }
           },
           "ApiGatewayRestApi": {
@@ -521,7 +521,7 @@
               "Type": "TOKEN"
             }
           },
-          "ApiGatewayDeployment1549004301134": {
+          "ApiGatewayDeployment1549348335281": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -691,19 +691,19 @@
           "AuthLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AuthLambdaVersionfHXuHhuEsESEDh48BkNGszoSCM2uf349sLfSFlj8"
+              "Ref": "AuthLambdaVersiony3GhnFr15Se2v8ETvsxarZ4K7roWlYnWPETJq3Zcpo"
             }
           },
           "PublicEndpointLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "PublicEndpointLambdaVersionNkhOde0A5hrMp1Ck8qUWJ1evUvqvaaJ2FqFi1WI80"
+              "Ref": "PublicEndpointLambdaVersionjuJEpQ7Mhbi11mcProXA375BFrNmWEnwEscw9VOkTc"
             }
           },
           "PrivateEndpointLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "PrivateEndpointLambdaVersion49LccyaAsBdKLKKNjJt1KjEv55j1YI5Ka2MMCiUOU"
+              "Ref": "PrivateEndpointLambdaVersionl0zRi6GYb2NMIvYQcnGvELSvCsTsgHsc8lvXnM0AsE"
             }
           },
           "ServiceEndpoint": {
@@ -758,7 +758,7 @@
         "package": {},
         "memory": 1024,
         "timeout": 6,
-        "runtime": "nodejs6.10",
+        "runtime": "nodejs8.10",
         "vpc": {}
       },
       "publicEndpoint": {
@@ -795,7 +795,7 @@
         "package": {},
         "memory": 1024,
         "timeout": 6,
-        "runtime": "nodejs6.10",
+        "runtime": "nodejs8.10",
         "vpc": {}
       },
       "privateEndpoint": {
@@ -842,7 +842,7 @@
         "package": {},
         "memory": 1024,
         "timeout": 6,
-        "runtime": "nodejs6.10",
+        "runtime": "nodejs8.10",
         "vpc": {}
       }
     },
@@ -882,7 +882,7 @@
     "artifact": "/Users/Swizec/Documents/random-coding/threadcompiler.com/backend/.serverless/aws-custom-authorizer-auth0.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/aws-custom-authorizer-auth0/dev/1549004301067-2019-02-01T06:58:21.067Z",
+    "artifactDirectoryName": "serverless/aws-custom-authorizer-auth0/dev/1549348335198-2019-02-05T06:32:15.198Z",
     "artifact": "aws-custom-authorizer-auth0.zip"
   }
 }
