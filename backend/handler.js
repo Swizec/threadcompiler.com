@@ -1,8 +1,13 @@
 const jwt = require('jsonwebtoken')
+const secrets = require('./secrets.json')
 
 // Set in `environment` of serverless.yml
 const AUTH0_CLIENT_ID = process.env.AUTH0_CLIENT_ID
 const AUTH0_CLIENT_PUBLIC_KEY = process.env.AUTH0_CLIENT_PUBLIC_KEY
+const AUTH0_MGMT_CLIENT_ID = process.env.AUTH0_MGMT_CLIENT_ID
+const AUTH0_MGMT_CLIENT_SECRET = process.env.AUTH0_MGMT_CLIENT_SECRET
+const TWITTER_CONSUMER_KEY = process.env.TWITTER_CONSUMER_KEY
+const TWITTER_CONSUMER_SECRET = process.env.TWITTER_CONSUMER_SECRET
 
 // Policy helper function
 const generatePolicy = (principalId, effect, resource) => {
@@ -85,8 +90,8 @@ module.exports.publicEndpoint = (event, context, callback) =>
 const { get, post } = require('httpie')
 const twitterAPI = require('node-twitter-api')
 const twitter = new twitterAPI({
-  consumerKey: 'tVBa6sa74Hzx2JQmoXcrvDLL7',
-  consumerSecret: 'REUokZOd1Pt1XfAgpRxAcpSDnxwjfx3PU1jmt1MVbSijhGrt0K',
+  consumerKey: TWITTER_CONSUMER_KEY,
+  consumerSecret: TWITTER_CONSUMER_SECRET,
 })
 
 // Talk to Auth0 to get our token
@@ -94,9 +99,8 @@ async function getAuth0Token() {
   const response = await post('https://threadcompiler.auth0.com/oauth/token', {
     headers: { 'content-type': 'application/json' },
     body: {
-      client_id: 'u52yBEMCsXbQtRJcpYWvmBHLb3fa7CmL',
-      client_secret:
-        'YEil53VlNVpBVttEOpGlPU8wPM3aQqAC5lnW2u9IYErUjyyC0Tk0Axn9gPjvOWUG',
+      client_id: AUTH0_MGMT_CLIENT_ID,
+      client_secret: AUTH0_MGMT_CLIENT_SECRET,
       audience: 'https://threadcompiler.auth0.com/api/v2/',
       grant_type: 'client_credentials',
     },
@@ -140,7 +144,7 @@ async function getUserToken(userId, access_token, token_type) {
 }
 
 // Private API -- tweets stuff
-module.exports.privateEndpoint = (event, context, callback) => {
+module.exports.privateEndpoint = async (event, context, callback) => {
   const { user_id, message } = JSON.parse(event.body)
 
   try {

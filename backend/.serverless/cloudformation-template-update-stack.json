@@ -116,7 +116,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/aws-custom-authorizer-auth0/dev/1549348335198-2019-02-05T06:32:15.198Z/aws-custom-authorizer-auth0.zip"
+          "S3Key": "serverless/aws-custom-authorizer-auth0/dev/1549350000983-2019-02-05T07:00:00.983Z/aws-custom-authorizer-auth0.zip"
         },
         "FunctionName": "aws-custom-authorizer-auth0-dev-auth",
         "Handler": "handler.auth",
@@ -132,7 +132,11 @@
         "Environment": {
           "Variables": {
             "AUTH0_CLIENT_ID": "qFnKgffxd1egZwn4FaTqCD17x4XuBDDJ",
-            "AUTH0_CLIENT_PUBLIC_KEY": "-----BEGIN CERTIFICATE-----\r\nMIIDCzCCAfOgAwIBAgIJY7bABD60laE/MA0GCSqGSIb3DQEBCwUAMCMxITAfBgNV\r\nBAMTGHRocmVhZGNvbXBpbGVyLmF1dGgwLmNvbTAeFw0xOTAxMTUwMDIwNDZaFw0z\r\nMjA5MjMwMDIwNDZaMCMxITAfBgNVBAMTGHRocmVhZGNvbXBpbGVyLmF1dGgwLmNv\r\nbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKg7kphD+mXP1CZODPtZ\r\nggYWISkKC4tbhYzJm6mKR/vAM61lK5CEkhCAy5WeMWqKLgMyyOIPQ7h7E05v3db/\r\nSr6CnN2AMdbVhN2y4RWVgunYfEXRd7kNnTM+o9/zCECm7pClIGiiO/UfqOIe/l5X\r\nC/v6Drocvauk+53psHVa184BjHm/romTEMcNE1szbDBjrEm0WIwkh7536TMTtP4S\r\n594kqCXDqOVmus1ufyBjgxNNheGD2HCODwNNwktsUc1uDjJ7WULm+w2NY1MdwWdY\r\nteFkaCSO0vOWYjoifNknXz8EJZyX0DzlfbY/KxCM3MEbKnRcUSuwhguzrnTMM9mI\r\nlncCAwEAAaNCMEAwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUdTbKafloYtze\r\nKkkMlHlqK6+tXQEwDgYDVR0PAQH/BAQDAgKEMA0GCSqGSIb3DQEBCwUAA4IBAQCh\r\nIZbi8CgI6myvml093PZhINmNBgFcqjXjDtcmaHcEV6Pijr2w20xVbo6j7GQu3cDJ\r\n862TBMMwVmgFETxq8Tr/ADiZHWN6m3so1O4WNz2RNH1rgzWiTwUrwA1pSsVQpta+\r\neQ45bubpC9wzrbku50Uu0VaZsBAMZKxvx8D6EItANeEzYlUdNyDdzcaijWL1YVnJ\r\nRFxpQKo1ie46bnmGumMH/AgeJaWryaeBvMZGo7wSVFQcPk+SEZOjdxlaaEkqzdPW\r\nq34xFU3Ldskl4zxfxHHsMwS58v0AUkcukT+BSC95puRdcADoRl9Htg035M+KmQsZ\r\ndS++M+W/B7YV9QlIeQVO\r\n-----END CERTIFICATE-----"
+            "AUTH0_CLIENT_PUBLIC_KEY": "-----BEGIN CERTIFICATE-----\r\nMIIDCzCCAfOgAwIBAgIJY7bABD60laE/MA0GCSqGSIb3DQEBCwUAMCMxITAfBgNV\r\nBAMTGHRocmVhZGNvbXBpbGVyLmF1dGgwLmNvbTAeFw0xOTAxMTUwMDIwNDZaFw0z\r\nMjA5MjMwMDIwNDZaMCMxITAfBgNVBAMTGHRocmVhZGNvbXBpbGVyLmF1dGgwLmNv\r\nbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKg7kphD+mXP1CZODPtZ\r\nggYWISkKC4tbhYzJm6mKR/vAM61lK5CEkhCAy5WeMWqKLgMyyOIPQ7h7E05v3db/\r\nSr6CnN2AMdbVhN2y4RWVgunYfEXRd7kNnTM+o9/zCECm7pClIGiiO/UfqOIe/l5X\r\nC/v6Drocvauk+53psHVa184BjHm/romTEMcNE1szbDBjrEm0WIwkh7536TMTtP4S\r\n594kqCXDqOVmus1ufyBjgxNNheGD2HCODwNNwktsUc1uDjJ7WULm+w2NY1MdwWdY\r\nteFkaCSO0vOWYjoifNknXz8EJZyX0DzlfbY/KxCM3MEbKnRcUSuwhguzrnTMM9mI\r\nlncCAwEAAaNCMEAwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUdTbKafloYtze\r\nKkkMlHlqK6+tXQEwDgYDVR0PAQH/BAQDAgKEMA0GCSqGSIb3DQEBCwUAA4IBAQCh\r\nIZbi8CgI6myvml093PZhINmNBgFcqjXjDtcmaHcEV6Pijr2w20xVbo6j7GQu3cDJ\r\n862TBMMwVmgFETxq8Tr/ADiZHWN6m3so1O4WNz2RNH1rgzWiTwUrwA1pSsVQpta+\r\neQ45bubpC9wzrbku50Uu0VaZsBAMZKxvx8D6EItANeEzYlUdNyDdzcaijWL1YVnJ\r\nRFxpQKo1ie46bnmGumMH/AgeJaWryaeBvMZGo7wSVFQcPk+SEZOjdxlaaEkqzdPW\r\nq34xFU3Ldskl4zxfxHHsMwS58v0AUkcukT+BSC95puRdcADoRl9Htg035M+KmQsZ\r\ndS++M+W/B7YV9QlIeQVO\r\n-----END CERTIFICATE-----",
+            "AUTH0_MGMT_CLIENT_ID": "u52yBEMCsXbQtRJcpYWvmBHLb3fa7CmL",
+            "AUTH0_MGMT_CLIENT_SECRET": "u8jZ8yrddxo-6gxF2unSmXGKNsZnkB8EIqvR95LRqLEMWJymTDapMJR6RzV4ioFJ",
+            "TWITTER_CONSUMER_KEY": "w6SzrXXZwbYkPxi1qiO3Qzqot",
+            "TWITTER_CONSUMER_SECRET": "14ZyuGgaMw47GjJYQn9RJulBoUcdOkguBMaMMAMqdQ6zWjWfyZ"
           }
         }
       },
@@ -141,14 +145,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "AuthLambdaVersiony3GhnFr15Se2v8ETvsxarZ4K7roWlYnWPETJq3Zcpo": {
+    "AuthLambdaVersionuM7aUKlryzp9PvrNrreIyeCSPM6CMLDCE13cyYseVXg": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "AuthLambdaFunction"
         },
-        "CodeSha256": "OzzdBbxAiABSBqwBcjEDai4qmOIKdmLrN9oebIv42wg="
+        "CodeSha256": "wStpbo2ZblYfgWJ/h/FcY52g3FmSo5du1J+VwpNOar8="
       }
     },
     "PublicEndpointLambdaFunction": {
@@ -158,7 +162,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/aws-custom-authorizer-auth0/dev/1549348335198-2019-02-05T06:32:15.198Z/aws-custom-authorizer-auth0.zip"
+          "S3Key": "serverless/aws-custom-authorizer-auth0/dev/1549350000983-2019-02-05T07:00:00.983Z/aws-custom-authorizer-auth0.zip"
         },
         "FunctionName": "aws-custom-authorizer-auth0-dev-publicEndpoint",
         "Handler": "handler.publicEndpoint",
@@ -174,7 +178,11 @@
         "Environment": {
           "Variables": {
             "AUTH0_CLIENT_ID": "qFnKgffxd1egZwn4FaTqCD17x4XuBDDJ",
-            "AUTH0_CLIENT_PUBLIC_KEY": "-----BEGIN CERTIFICATE-----\r\nMIIDCzCCAfOgAwIBAgIJY7bABD60laE/MA0GCSqGSIb3DQEBCwUAMCMxITAfBgNV\r\nBAMTGHRocmVhZGNvbXBpbGVyLmF1dGgwLmNvbTAeFw0xOTAxMTUwMDIwNDZaFw0z\r\nMjA5MjMwMDIwNDZaMCMxITAfBgNVBAMTGHRocmVhZGNvbXBpbGVyLmF1dGgwLmNv\r\nbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKg7kphD+mXP1CZODPtZ\r\nggYWISkKC4tbhYzJm6mKR/vAM61lK5CEkhCAy5WeMWqKLgMyyOIPQ7h7E05v3db/\r\nSr6CnN2AMdbVhN2y4RWVgunYfEXRd7kNnTM+o9/zCECm7pClIGiiO/UfqOIe/l5X\r\nC/v6Drocvauk+53psHVa184BjHm/romTEMcNE1szbDBjrEm0WIwkh7536TMTtP4S\r\n594kqCXDqOVmus1ufyBjgxNNheGD2HCODwNNwktsUc1uDjJ7WULm+w2NY1MdwWdY\r\nteFkaCSO0vOWYjoifNknXz8EJZyX0DzlfbY/KxCM3MEbKnRcUSuwhguzrnTMM9mI\r\nlncCAwEAAaNCMEAwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUdTbKafloYtze\r\nKkkMlHlqK6+tXQEwDgYDVR0PAQH/BAQDAgKEMA0GCSqGSIb3DQEBCwUAA4IBAQCh\r\nIZbi8CgI6myvml093PZhINmNBgFcqjXjDtcmaHcEV6Pijr2w20xVbo6j7GQu3cDJ\r\n862TBMMwVmgFETxq8Tr/ADiZHWN6m3so1O4WNz2RNH1rgzWiTwUrwA1pSsVQpta+\r\neQ45bubpC9wzrbku50Uu0VaZsBAMZKxvx8D6EItANeEzYlUdNyDdzcaijWL1YVnJ\r\nRFxpQKo1ie46bnmGumMH/AgeJaWryaeBvMZGo7wSVFQcPk+SEZOjdxlaaEkqzdPW\r\nq34xFU3Ldskl4zxfxHHsMwS58v0AUkcukT+BSC95puRdcADoRl9Htg035M+KmQsZ\r\ndS++M+W/B7YV9QlIeQVO\r\n-----END CERTIFICATE-----"
+            "AUTH0_CLIENT_PUBLIC_KEY": "-----BEGIN CERTIFICATE-----\r\nMIIDCzCCAfOgAwIBAgIJY7bABD60laE/MA0GCSqGSIb3DQEBCwUAMCMxITAfBgNV\r\nBAMTGHRocmVhZGNvbXBpbGVyLmF1dGgwLmNvbTAeFw0xOTAxMTUwMDIwNDZaFw0z\r\nMjA5MjMwMDIwNDZaMCMxITAfBgNVBAMTGHRocmVhZGNvbXBpbGVyLmF1dGgwLmNv\r\nbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKg7kphD+mXP1CZODPtZ\r\nggYWISkKC4tbhYzJm6mKR/vAM61lK5CEkhCAy5WeMWqKLgMyyOIPQ7h7E05v3db/\r\nSr6CnN2AMdbVhN2y4RWVgunYfEXRd7kNnTM+o9/zCECm7pClIGiiO/UfqOIe/l5X\r\nC/v6Drocvauk+53psHVa184BjHm/romTEMcNE1szbDBjrEm0WIwkh7536TMTtP4S\r\n594kqCXDqOVmus1ufyBjgxNNheGD2HCODwNNwktsUc1uDjJ7WULm+w2NY1MdwWdY\r\nteFkaCSO0vOWYjoifNknXz8EJZyX0DzlfbY/KxCM3MEbKnRcUSuwhguzrnTMM9mI\r\nlncCAwEAAaNCMEAwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUdTbKafloYtze\r\nKkkMlHlqK6+tXQEwDgYDVR0PAQH/BAQDAgKEMA0GCSqGSIb3DQEBCwUAA4IBAQCh\r\nIZbi8CgI6myvml093PZhINmNBgFcqjXjDtcmaHcEV6Pijr2w20xVbo6j7GQu3cDJ\r\n862TBMMwVmgFETxq8Tr/ADiZHWN6m3so1O4WNz2RNH1rgzWiTwUrwA1pSsVQpta+\r\neQ45bubpC9wzrbku50Uu0VaZsBAMZKxvx8D6EItANeEzYlUdNyDdzcaijWL1YVnJ\r\nRFxpQKo1ie46bnmGumMH/AgeJaWryaeBvMZGo7wSVFQcPk+SEZOjdxlaaEkqzdPW\r\nq34xFU3Ldskl4zxfxHHsMwS58v0AUkcukT+BSC95puRdcADoRl9Htg035M+KmQsZ\r\ndS++M+W/B7YV9QlIeQVO\r\n-----END CERTIFICATE-----",
+            "AUTH0_MGMT_CLIENT_ID": "u52yBEMCsXbQtRJcpYWvmBHLb3fa7CmL",
+            "AUTH0_MGMT_CLIENT_SECRET": "u8jZ8yrddxo-6gxF2unSmXGKNsZnkB8EIqvR95LRqLEMWJymTDapMJR6RzV4ioFJ",
+            "TWITTER_CONSUMER_KEY": "w6SzrXXZwbYkPxi1qiO3Qzqot",
+            "TWITTER_CONSUMER_SECRET": "14ZyuGgaMw47GjJYQn9RJulBoUcdOkguBMaMMAMqdQ6zWjWfyZ"
           }
         }
       },
@@ -183,14 +191,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "PublicEndpointLambdaVersionjuJEpQ7Mhbi11mcProXA375BFrNmWEnwEscw9VOkTc": {
+    "PublicEndpointLambdaVersionaX7KNBvZirTpjaFiCl7EQylSL5mAUOzI9mpkMJVbfM": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "PublicEndpointLambdaFunction"
         },
-        "CodeSha256": "OzzdBbxAiABSBqwBcjEDai4qmOIKdmLrN9oebIv42wg="
+        "CodeSha256": "wStpbo2ZblYfgWJ/h/FcY52g3FmSo5du1J+VwpNOar8="
       }
     },
     "PrivateEndpointLambdaFunction": {
@@ -200,7 +208,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/aws-custom-authorizer-auth0/dev/1549348335198-2019-02-05T06:32:15.198Z/aws-custom-authorizer-auth0.zip"
+          "S3Key": "serverless/aws-custom-authorizer-auth0/dev/1549350000983-2019-02-05T07:00:00.983Z/aws-custom-authorizer-auth0.zip"
         },
         "FunctionName": "aws-custom-authorizer-auth0-dev-privateEndpoint",
         "Handler": "handler.privateEndpoint",
@@ -216,7 +224,11 @@
         "Environment": {
           "Variables": {
             "AUTH0_CLIENT_ID": "qFnKgffxd1egZwn4FaTqCD17x4XuBDDJ",
-            "AUTH0_CLIENT_PUBLIC_KEY": "-----BEGIN CERTIFICATE-----\r\nMIIDCzCCAfOgAwIBAgIJY7bABD60laE/MA0GCSqGSIb3DQEBCwUAMCMxITAfBgNV\r\nBAMTGHRocmVhZGNvbXBpbGVyLmF1dGgwLmNvbTAeFw0xOTAxMTUwMDIwNDZaFw0z\r\nMjA5MjMwMDIwNDZaMCMxITAfBgNVBAMTGHRocmVhZGNvbXBpbGVyLmF1dGgwLmNv\r\nbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKg7kphD+mXP1CZODPtZ\r\nggYWISkKC4tbhYzJm6mKR/vAM61lK5CEkhCAy5WeMWqKLgMyyOIPQ7h7E05v3db/\r\nSr6CnN2AMdbVhN2y4RWVgunYfEXRd7kNnTM+o9/zCECm7pClIGiiO/UfqOIe/l5X\r\nC/v6Drocvauk+53psHVa184BjHm/romTEMcNE1szbDBjrEm0WIwkh7536TMTtP4S\r\n594kqCXDqOVmus1ufyBjgxNNheGD2HCODwNNwktsUc1uDjJ7WULm+w2NY1MdwWdY\r\nteFkaCSO0vOWYjoifNknXz8EJZyX0DzlfbY/KxCM3MEbKnRcUSuwhguzrnTMM9mI\r\nlncCAwEAAaNCMEAwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUdTbKafloYtze\r\nKkkMlHlqK6+tXQEwDgYDVR0PAQH/BAQDAgKEMA0GCSqGSIb3DQEBCwUAA4IBAQCh\r\nIZbi8CgI6myvml093PZhINmNBgFcqjXjDtcmaHcEV6Pijr2w20xVbo6j7GQu3cDJ\r\n862TBMMwVmgFETxq8Tr/ADiZHWN6m3so1O4WNz2RNH1rgzWiTwUrwA1pSsVQpta+\r\neQ45bubpC9wzrbku50Uu0VaZsBAMZKxvx8D6EItANeEzYlUdNyDdzcaijWL1YVnJ\r\nRFxpQKo1ie46bnmGumMH/AgeJaWryaeBvMZGo7wSVFQcPk+SEZOjdxlaaEkqzdPW\r\nq34xFU3Ldskl4zxfxHHsMwS58v0AUkcukT+BSC95puRdcADoRl9Htg035M+KmQsZ\r\ndS++M+W/B7YV9QlIeQVO\r\n-----END CERTIFICATE-----"
+            "AUTH0_CLIENT_PUBLIC_KEY": "-----BEGIN CERTIFICATE-----\r\nMIIDCzCCAfOgAwIBAgIJY7bABD60laE/MA0GCSqGSIb3DQEBCwUAMCMxITAfBgNV\r\nBAMTGHRocmVhZGNvbXBpbGVyLmF1dGgwLmNvbTAeFw0xOTAxMTUwMDIwNDZaFw0z\r\nMjA5MjMwMDIwNDZaMCMxITAfBgNVBAMTGHRocmVhZGNvbXBpbGVyLmF1dGgwLmNv\r\nbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKg7kphD+mXP1CZODPtZ\r\nggYWISkKC4tbhYzJm6mKR/vAM61lK5CEkhCAy5WeMWqKLgMyyOIPQ7h7E05v3db/\r\nSr6CnN2AMdbVhN2y4RWVgunYfEXRd7kNnTM+o9/zCECm7pClIGiiO/UfqOIe/l5X\r\nC/v6Drocvauk+53psHVa184BjHm/romTEMcNE1szbDBjrEm0WIwkh7536TMTtP4S\r\n594kqCXDqOVmus1ufyBjgxNNheGD2HCODwNNwktsUc1uDjJ7WULm+w2NY1MdwWdY\r\nteFkaCSO0vOWYjoifNknXz8EJZyX0DzlfbY/KxCM3MEbKnRcUSuwhguzrnTMM9mI\r\nlncCAwEAAaNCMEAwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUdTbKafloYtze\r\nKkkMlHlqK6+tXQEwDgYDVR0PAQH/BAQDAgKEMA0GCSqGSIb3DQEBCwUAA4IBAQCh\r\nIZbi8CgI6myvml093PZhINmNBgFcqjXjDtcmaHcEV6Pijr2w20xVbo6j7GQu3cDJ\r\n862TBMMwVmgFETxq8Tr/ADiZHWN6m3so1O4WNz2RNH1rgzWiTwUrwA1pSsVQpta+\r\neQ45bubpC9wzrbku50Uu0VaZsBAMZKxvx8D6EItANeEzYlUdNyDdzcaijWL1YVnJ\r\nRFxpQKo1ie46bnmGumMH/AgeJaWryaeBvMZGo7wSVFQcPk+SEZOjdxlaaEkqzdPW\r\nq34xFU3Ldskl4zxfxHHsMwS58v0AUkcukT+BSC95puRdcADoRl9Htg035M+KmQsZ\r\ndS++M+W/B7YV9QlIeQVO\r\n-----END CERTIFICATE-----",
+            "AUTH0_MGMT_CLIENT_ID": "u52yBEMCsXbQtRJcpYWvmBHLb3fa7CmL",
+            "AUTH0_MGMT_CLIENT_SECRET": "u8jZ8yrddxo-6gxF2unSmXGKNsZnkB8EIqvR95LRqLEMWJymTDapMJR6RzV4ioFJ",
+            "TWITTER_CONSUMER_KEY": "w6SzrXXZwbYkPxi1qiO3Qzqot",
+            "TWITTER_CONSUMER_SECRET": "14ZyuGgaMw47GjJYQn9RJulBoUcdOkguBMaMMAMqdQ6zWjWfyZ"
           }
         }
       },
@@ -225,14 +237,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "PrivateEndpointLambdaVersionl0zRi6GYb2NMIvYQcnGvELSvCsTsgHsc8lvXnM0AsE": {
+    "PrivateEndpointLambdaVersiony4lYcycAxRPoZAJaTRlP964NaFBVIjglJ8KN0ClyiZs": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "PrivateEndpointLambdaFunction"
         },
-        "CodeSha256": "OzzdBbxAiABSBqwBcjEDai4qmOIKdmLrN9oebIv42wg="
+        "CodeSha256": "wStpbo2ZblYfgWJ/h/FcY52g3FmSo5du1J+VwpNOar8="
       }
     },
     "ApiGatewayRestApi": {
@@ -503,7 +515,7 @@
         "Type": "TOKEN"
       }
     },
-    "ApiGatewayDeployment1549348335281": {
+    "ApiGatewayDeployment1549350001070": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -673,19 +685,19 @@
     "AuthLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "AuthLambdaVersiony3GhnFr15Se2v8ETvsxarZ4K7roWlYnWPETJq3Zcpo"
+        "Ref": "AuthLambdaVersionuM7aUKlryzp9PvrNrreIyeCSPM6CMLDCE13cyYseVXg"
       }
     },
     "PublicEndpointLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "PublicEndpointLambdaVersionjuJEpQ7Mhbi11mcProXA375BFrNmWEnwEscw9VOkTc"
+        "Ref": "PublicEndpointLambdaVersionaX7KNBvZirTpjaFiCl7EQylSL5mAUOzI9mpkMJVbfM"
       }
     },
     "PrivateEndpointLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "PrivateEndpointLambdaVersionl0zRi6GYb2NMIvYQcnGvELSvCsTsgHsc8lvXnM0AsE"
+        "Ref": "PrivateEndpointLambdaVersiony4lYcycAxRPoZAJaTRlP964NaFBVIjglJ8KN0ClyiZs"
       }
     },
     "ServiceEndpoint": {

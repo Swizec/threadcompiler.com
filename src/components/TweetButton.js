@@ -28,7 +28,7 @@ export default () => {
     const { data, statusCode } = res
 
     console.log(statusCode, data.message)
-    setMessage(data.message)
+    setMessage(JSON.stringify(data.message))
   }
 
   return (
