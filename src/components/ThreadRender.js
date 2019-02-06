@@ -30,6 +30,7 @@ const CharCount = ({ value }) => {
 
 const Tweet = ({ value }) => {
   const [rendered, setRendered] = useState('')
+  const { setOutput } = useContext(ThreadContainer.Context)
 
   useEffect(
     () => {
@@ -41,6 +42,7 @@ const Tweet = ({ value }) => {
             console.error(err)
           } else {
             setRendered(output.contents)
+            setOutput(output.contents)
           }
         })
     },

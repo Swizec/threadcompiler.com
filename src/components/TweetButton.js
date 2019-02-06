@@ -13,7 +13,7 @@ export default () => {
   const [success, setSuccess] = useState(null)
   const [error, setError] = useState('')
   const [tweet, setTweet] = useState({})
-  const { input } = useContext(ThreadContainer.Context)
+  const { output } = useContext(ThreadContainer.Context)
 
   const callPrivate = async () => {
     const token = auth.getToken()
@@ -25,7 +25,7 @@ export default () => {
         },
         body: {
           user_id: auth.getUser().sub,
-          message: input,
+          message: output,
         },
       })
       const { data, statusCode } = res

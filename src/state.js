@@ -3,11 +3,12 @@ import createContainer from 'constate'
 
 export function useThreadInput() {
   const [input, setInput] = useState('')
-  const update = event => setInput(event.target.value)
-  return { input, update }
-}
+  const [output, setOutput] = useState('')
 
-console.log(createContainer)
+  const update = event => setInput(event.target.value)
+
+  return { input, update, output, setOutput }
+}
 
 const ThreadContainer = createContainer(useThreadInput)
 
