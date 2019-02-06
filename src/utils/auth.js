@@ -2,6 +2,10 @@ import auth0 from 'auth0-js'
 import { navigate } from 'gatsby'
 
 const AUTH0_DOMAIN = 'threadcompiler.auth0.com'
+const CALLBACK_DOMAIN =
+  typeof window !== 'undefined' ? window.location.host : 'localhost:8000'
+const PROTOCOL =
+  typeof window !== 'undefined' ? window.location.protocol : 'http:'
 const AUTH0_CLIENT_ID = 'qFnKgffxd1egZwn4FaTqCD17x4XuBDDJ'
 export const PUBLIC_ENDPOINT =
   'https://2x2vvyzhh5.execute-api.us-west-2.amazonaws.com/dev/api/public'
@@ -12,7 +16,7 @@ export default class Auth {
   auth0 = new auth0.WebAuth({
     domain: AUTH0_DOMAIN,
     clientID: AUTH0_CLIENT_ID,
-    redirectUri: 'http://localhost:8000/auth0_callback',
+    redirectUri: `${PROTOCOL}//${CALLBACK_DOMAIN}/auth0_callback`,
     audience: `https://${AUTH0_DOMAIN}/api/v2/`,
     responseType: 'token id_token',
     scope: 'openid profile email',
@@ -46,8 +50,12 @@ export default class Auth {
   }
 
   isAuthenticated = () => {
-    const expiresAt = JSON.parse(localStorage.getItem('expires_at'))
-    return new Date().getTime() < expiresAt
+    if (typeof localStorage !== 'undefined') {
+      const expiresAt = JSON.parse(localStorage.getItem('expires_at'))
+      return new Date().getTime() < expiresAt
+    } else {
+      return false
+    }
   }
 
   setSession = authResult => {

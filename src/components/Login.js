@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button } from 'reakit'
-import Auth, { PRIVATE_ENDPOINT, PUBLIC_ENDPOINT } from '../utils/Auth'
+import Auth from '../utils/auth'
 
 const auth = new Auth()
 

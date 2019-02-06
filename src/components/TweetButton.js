@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react'
 import { Button } from 'reakit'
 import { post } from 'httpie'
 
-import Auth, { PRIVATE_ENDPOINT } from '../utils/Auth'
+import Auth, { PRIVATE_ENDPOINT } from '../utils/auth'
 import { ThreadContainer } from '../state'
 
 const auth = new Auth()
