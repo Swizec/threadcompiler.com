@@ -1,9 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react'
-import remark from 'remark'
-import utf8 from 'remark-utf8'
-import codeScreenshot from 'remark-code-screenshot'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
 
+import useRemark from '../utils/useRemark'
 import { ThreadContainer } from '../state'
 
 const TweetStyle = styled.div`
@@ -29,25 +27,7 @@ const CharCount = ({ value }) => {
 }
 
 const Tweet = ({ value }) => {
-  const [rendered, setRendered] = useState('')
-  const { setOutput } = useContext(ThreadContainer.Context)
-
-  useEffect(
-    () => {
-      remark()
-        .use(utf8)
-        .use(codeScreenshot)
-        .process(value, (err, output) => {
-          if (err) {
-            console.error(err)
-          } else {
-            setRendered(output.contents)
-            setOutput(output.contents)
-          }
-        })
-    },
-    [value]
-  )
+  const rendered = useRemark(value)
 
   return (
     <TweetStyle>
