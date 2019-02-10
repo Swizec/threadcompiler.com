@@ -3,6 +3,8 @@ import { post } from 'httpie'
 
 import { ThreadContainer } from '../state'
 import Auth, { PRIVATE_ENDPOINT } from '../utils/auth'
+import { renderTweet } from './useRemark'
+
 const auth = new Auth()
 
 class APIError extends Error {
@@ -46,8 +48,12 @@ export default function useTwitterThread() {
   async function sendTweets() {
     let tweet = input.split('---')[0]
 
+    // Turn this into a loop that ties tweets together
+
     try {
+      tweet = await renderTweet(tweet)
       tweet = await sendTweet(tweet)
+
       setTweets([...tweets, tweet])
       setSuccess(true)
     } catch (error) {

@@ -17,7 +17,7 @@ export default () => {
         <div>
           <p>Great success! Your tweet looks like this 👇</p>
           {tweets.map(tweet => (
-            <TweetEmbed id={tweet.id_str} />
+            <TweetEmbed id={tweet.id_str} key={tweet.id_str} />
           ))}
         </div>
       ) : null}
