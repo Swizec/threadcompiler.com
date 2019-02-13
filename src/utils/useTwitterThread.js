@@ -46,22 +46,24 @@ export default function useTwitterThread() {
   const { input } = useContext(ThreadContainer.Context)
 
   async function sendTweets() {
-    let tweet = input.split('---')[0]
+    const tweets = input.split('---')
 
-    // Turn this into a loop that ties tweets together
+    for (let tweet of tweets) {
+      try {
+        tweet = await renderTweet(tweet)
+        tweet = await sendTweet(tweet)
 
-    try {
-      tweet = await renderTweet(tweet)
-      tweet = await sendTweet(tweet)
+        console.log(tweets)
+        console.log(tweet)
 
-      setTweets([...tweets, tweet])
-      setSuccess(true)
-    } catch (error) {
-      if (error.name === 'APIError') {
-        setSuccess(false)
-        setError(error.message)
-      } else {
-        throw error
+        setTweets([...tweets, tweet])
+        setSuccess(true)
+      } catch (error) {
+        if (error.name === 'APIError') {
+          setError(error.message)
+        } else {
+          throw error
+        }
       }
     }
   }

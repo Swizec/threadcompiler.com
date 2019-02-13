@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken')
+const logger = require('./logger')
 const secrets = require('./secrets.json')
 
 // Set in `environment` of serverless.yml
@@ -89,6 +90,8 @@ module.exports.publicEndpoint = (event, context, callback) =>
 // import { get, post } from 'httpie'
 const { get, post } = require('httpie')
 const twitterAPI = require('node-twitter-api')
+logger.debug('twitter key', TWITTER_CONSUMER_KEY)
+logger.debug('twitter secret', TWITTER_CONSUMER_SECRET)
 const twitter = new twitterAPI({
   consumerKey: TWITTER_CONSUMER_KEY,
   consumerSecret: TWITTER_CONSUMER_SECRET,
@@ -112,6 +115,10 @@ async function getAuth0Token() {
 
 // Send a tweet
 async function tweet(text, identity) {
+  console.log('typeof', typeof identity.access_token)
+  logger.debug('user acces token', identity.access_token)
+  logger.debug('user secret', identity.access_token_secret)
+
   return new Promise((resolve, reject) => {
     twitter.statuses(
       'update',
