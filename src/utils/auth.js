@@ -8,9 +8,9 @@ const PROTOCOL =
   typeof window !== 'undefined' ? window.location.protocol : 'http:'
 const AUTH0_CLIENT_ID = 'qFnKgffxd1egZwn4FaTqCD17x4XuBDDJ'
 export const PUBLIC_ENDPOINT =
-  'https://2x2vvyzhh5.execute-api.us-west-2.amazonaws.com/dev/api/public'
+  'https://jj8r0rl81f.execute-api.us-west-2.amazonaws.com/swizec-test/api/public'
 export const PRIVATE_ENDPOINT =
-  'https://2x2vvyzhh5.execute-api.us-west-2.amazonaws.com/dev/api/private'
+  'https://jj8r0rl81f.execute-api.us-west-2.amazonaws.com/swizec-test/api/private'
 
 export default class Auth {
   auth0 = new auth0.WebAuth({

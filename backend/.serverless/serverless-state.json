@@ -5,7 +5,7 @@
       "name": "aws-custom-authorizer-auth0"
     },
     "provider": {
-      "stage": "dev",
+      "stage": "swizec-test",
       "region": "us-west-2",
       "variableSyntax": "\\${([ ~:a-zA-Z0-9._'\",\\-\\/\\(\\)]+?)}",
       "name": "aws",
@@ -30,19 +30,19 @@
           "AuthLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/lambda/aws-custom-authorizer-auth0-dev-auth"
+              "LogGroupName": "/aws/lambda/aws-custom-authorizer-auth0-swizec-test-auth"
             }
           },
           "PublicEndpointLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/lambda/aws-custom-authorizer-auth0-dev-publicEndpoint"
+              "LogGroupName": "/aws/lambda/aws-custom-authorizer-auth0-swizec-test-publicEndpoint"
             }
           },
           "PrivateEndpointLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/lambda/aws-custom-authorizer-auth0-dev-privateEndpoint"
+              "LogGroupName": "/aws/lambda/aws-custom-authorizer-auth0-swizec-test-privateEndpoint"
             }
           },
           "IamRoleLambdaExecution": {
@@ -70,7 +70,7 @@
                     "Fn::Join": [
                       "-",
                       [
-                        "dev",
+                        "swizec-test",
                         "aws-custom-authorizer-auth0",
                         "lambda"
                       ]
@@ -86,13 +86,13 @@
                         ],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/aws-custom-authorizer-auth0-dev-auth:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/aws-custom-authorizer-auth0-swizec-test-auth:*"
                           },
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/aws-custom-authorizer-auth0-dev-publicEndpoint:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/aws-custom-authorizer-auth0-swizec-test-publicEndpoint:*"
                           },
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/aws-custom-authorizer-auth0-dev-privateEndpoint:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/aws-custom-authorizer-auth0-swizec-test-privateEndpoint:*"
                           }
                         ]
                       },
@@ -103,13 +103,13 @@
                         ],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/aws-custom-authorizer-auth0-dev-auth:*:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/aws-custom-authorizer-auth0-swizec-test-auth:*:*"
                           },
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/aws-custom-authorizer-auth0-dev-publicEndpoint:*:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/aws-custom-authorizer-auth0-swizec-test-publicEndpoint:*:*"
                           },
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/aws-custom-authorizer-auth0-dev-privateEndpoint:*:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/aws-custom-authorizer-auth0-swizec-test-privateEndpoint:*:*"
                           }
                         ]
                       }
@@ -123,7 +123,7 @@
                   "-",
                   [
                     "aws-custom-authorizer-auth0",
-                    "dev",
+                    "swizec-test",
                     "us-west-2",
                     "lambdaRole"
                   ]
@@ -138,9 +138,9 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/aws-custom-authorizer-auth0/dev/1550042347084-2019-02-13T07:19:07.084Z/aws-custom-authorizer-auth0.zip"
+                "S3Key": "serverless/aws-custom-authorizer-auth0/swizec-test/1550819864347-2019-02-22T07:17:44.347Z/aws-custom-authorizer-auth0.zip"
               },
-              "FunctionName": "aws-custom-authorizer-auth0-dev-auth",
+              "FunctionName": "aws-custom-authorizer-auth0-swizec-test-auth",
               "Handler": "handler.auth",
               "MemorySize": 1024,
               "Role": {
@@ -167,14 +167,14 @@
               "IamRoleLambdaExecution"
             ]
           },
-          "AuthLambdaVersionXCSTywNutswImliaUD96iYmuagw9rV33HIlBBckLsU": {
+          "AuthLambdaVersionhUU1A0nQXagEQtH1t1g4GZgTtsMCvXhwHu3WEIRluyA": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AuthLambdaFunction"
               },
-              "CodeSha256": "VG4kXod4HNrxxO/0q3cdvm17TiFvPFTkAcNw3DdM9iE="
+              "CodeSha256": "fEcDR5z1XG0sEPIdhXvsCn4HwD7cQOBemgIieAwJAms="
             }
           },
           "PublicEndpointLambdaFunction": {
@@ -184,9 +184,9 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/aws-custom-authorizer-auth0/dev/1550042347084-2019-02-13T07:19:07.084Z/aws-custom-authorizer-auth0.zip"
+                "S3Key": "serverless/aws-custom-authorizer-auth0/swizec-test/1550819864347-2019-02-22T07:17:44.347Z/aws-custom-authorizer-auth0.zip"
               },
-              "FunctionName": "aws-custom-authorizer-auth0-dev-publicEndpoint",
+              "FunctionName": "aws-custom-authorizer-auth0-swizec-test-publicEndpoint",
               "Handler": "handler.publicEndpoint",
               "MemorySize": 1024,
               "Role": {
@@ -213,14 +213,14 @@
               "IamRoleLambdaExecution"
             ]
           },
-          "PublicEndpointLambdaVersionHDZOlCJNxcQpc7JTcczxSAmRDu3ZtBthqn76liG3gA": {
+          "PublicEndpointLambdaVersionb6JfWuHnJkpimQ9J0Zdoo48ewwTdZErNmmGQqsO4GvY": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "PublicEndpointLambdaFunction"
               },
-              "CodeSha256": "VG4kXod4HNrxxO/0q3cdvm17TiFvPFTkAcNw3DdM9iE="
+              "CodeSha256": "fEcDR5z1XG0sEPIdhXvsCn4HwD7cQOBemgIieAwJAms="
             }
           },
           "PrivateEndpointLambdaFunction": {
@@ -230,9 +230,9 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/aws-custom-authorizer-auth0/dev/1550042347084-2019-02-13T07:19:07.084Z/aws-custom-authorizer-auth0.zip"
+                "S3Key": "serverless/aws-custom-authorizer-auth0/swizec-test/1550819864347-2019-02-22T07:17:44.347Z/aws-custom-authorizer-auth0.zip"
               },
-              "FunctionName": "aws-custom-authorizer-auth0-dev-privateEndpoint",
+              "FunctionName": "aws-custom-authorizer-auth0-swizec-test-privateEndpoint",
               "Handler": "handler.privateEndpoint",
               "MemorySize": 1024,
               "Role": {
@@ -259,20 +259,20 @@
               "IamRoleLambdaExecution"
             ]
           },
-          "PrivateEndpointLambdaVersionmhPEuOhDg8fLnbWmwXzkC6xSVbDQzWrY9lID29xjZw": {
+          "PrivateEndpointLambdaVersionrcffsl9I8rY8SWpEw9zqJFgohOJqmHqXKCgY2GAdhoI": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "PrivateEndpointLambdaFunction"
               },
-              "CodeSha256": "VG4kXod4HNrxxO/0q3cdvm17TiFvPFTkAcNw3DdM9iE="
+              "CodeSha256": "fEcDR5z1XG0sEPIdhXvsCn4HwD7cQOBemgIieAwJAms="
             }
           },
           "ApiGatewayRestApi": {
             "Type": "AWS::ApiGateway::RestApi",
             "Properties": {
-              "Name": "dev-aws-custom-authorizer-auth0",
+              "Name": "swizec-test-aws-custom-authorizer-auth0",
               "EndpointConfiguration": {
                 "Types": [
                   "EDGE"
@@ -537,13 +537,13 @@
               "Type": "TOKEN"
             }
           },
-          "ApiGatewayDeployment1550042347185": {
+          "ApiGatewayDeployment1550819864465": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               },
-              "StageName": "dev"
+              "StageName": "swizec-test"
             },
             "DependsOn": [
               "ApiGatewayMethodApiPublicOptions",
@@ -707,19 +707,19 @@
           "AuthLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AuthLambdaVersionXCSTywNutswImliaUD96iYmuagw9rV33HIlBBckLsU"
+              "Ref": "AuthLambdaVersionhUU1A0nQXagEQtH1t1g4GZgTtsMCvXhwHu3WEIRluyA"
             }
           },
           "PublicEndpointLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "PublicEndpointLambdaVersionHDZOlCJNxcQpc7JTcczxSAmRDu3ZtBthqn76liG3gA"
+              "Ref": "PublicEndpointLambdaVersionb6JfWuHnJkpimQ9J0Zdoo48ewwTdZErNmmGQqsO4GvY"
             }
           },
           "PrivateEndpointLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "PrivateEndpointLambdaVersionmhPEuOhDg8fLnbWmwXzkC6xSVbDQzWrY9lID29xjZw"
+              "Ref": "PrivateEndpointLambdaVersionrcffsl9I8rY8SWpEw9zqJFgohOJqmHqXKCgY2GAdhoI"
             }
           },
           "ServiceEndpoint": {
@@ -736,7 +736,7 @@
                   {
                     "Ref": "AWS::URLSuffix"
                   },
-                  "/dev"
+                  "/swizec-test"
                 ]
               ]
             }
@@ -770,7 +770,7 @@
         "handler": "handler.auth",
         "cors": true,
         "events": [],
-        "name": "aws-custom-authorizer-auth0-dev-auth",
+        "name": "aws-custom-authorizer-auth0-swizec-test-auth",
         "package": {},
         "memory": 1024,
         "timeout": 6,
@@ -807,7 +807,7 @@
             }
           }
         ],
-        "name": "aws-custom-authorizer-auth0-dev-publicEndpoint",
+        "name": "aws-custom-authorizer-auth0-swizec-test-publicEndpoint",
         "package": {},
         "memory": 1024,
         "timeout": 6,
@@ -854,7 +854,7 @@
             }
           }
         ],
-        "name": "aws-custom-authorizer-auth0-dev-privateEndpoint",
+        "name": "aws-custom-authorizer-auth0-swizec-test-privateEndpoint",
         "package": {},
         "memory": 1024,
         "timeout": 6,
@@ -898,7 +898,7 @@
     "artifact": "/Users/Swizec/Documents/random-coding/threadcompiler.com/backend/.serverless/aws-custom-authorizer-auth0.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/aws-custom-authorizer-auth0/dev/1550042347084-2019-02-13T07:19:07.084Z",
+    "artifactDirectoryName": "serverless/aws-custom-authorizer-auth0/swizec-test/1550819864347-2019-02-22T07:17:44.347Z",
     "artifact": "aws-custom-authorizer-auth0.zip"
   }
 }

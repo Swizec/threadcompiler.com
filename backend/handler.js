@@ -3,12 +3,17 @@ const logger = require('./logger')
 const secrets = require('./secrets.json')
 
 // Set in `environment` of serverless.yml
-const AUTH0_CLIENT_ID = process.env.AUTH0_CLIENT_ID
-const AUTH0_CLIENT_PUBLIC_KEY = process.env.AUTH0_CLIENT_PUBLIC_KEY
-const AUTH0_MGMT_CLIENT_ID = process.env.AUTH0_MGMT_CLIENT_ID
-const AUTH0_MGMT_CLIENT_SECRET = process.env.AUTH0_MGMT_CLIENT_SECRET
-const TWITTER_CONSUMER_KEY = process.env.TWITTER_CONSUMER_KEY
-const TWITTER_CONSUMER_SECRET = process.env.TWITTER_CONSUMER_SECRET
+const AUTH0_CLIENT_ID = process.env.AUTH0_CLIENT_ID || secrets.AUTH0_CLIENT_ID
+const AUTH0_CLIENT_PUBLIC_KEY =
+  process.env.AUTH0_CLIENT_PUBLIC_KEY || secrets.AUTH0_CLIENT_PUBLIC_KEY
+const AUTH0_MGMT_CLIENT_ID =
+  process.env.AUTH0_MGMT_CLIENT_ID || secrets.AUTH0_MGMT_CLIENT_ID
+const AUTH0_MGMT_CLIENT_SECRET =
+  process.env.AUTH0_MGMT_CLIENT_SECRET || secrets.AUTH0_MGMT_CLIENT_SECRET
+const TWITTER_CONSUMER_KEY =
+  process.env.TWITTER_CONSUMER_KEY || secrets.TWITTER_CONSUMER_KEY
+const TWITTER_CONSUMER_SECRET =
+  process.env.TWITTER_CONSUMER_SECRET || secrets.TWITTER_CONSUMER_SECRET
 
 // Policy helper function
 const generatePolicy = (principalId, effect, resource) => {
@@ -30,7 +35,6 @@ const generatePolicy = (principalId, effect, resource) => {
 
 // Reusable Authorizer function, set on `authorizer` field in serverless.yml
 module.exports.auth = (event, context, callback) => {
-  console.log('event', event)
   if (!event.authorizationToken) {
     return callback('Unauthorized')
   }
@@ -90,8 +94,6 @@ module.exports.publicEndpoint = (event, context, callback) =>
 // import { get, post } from 'httpie'
 const { get, post } = require('httpie')
 const twitterAPI = require('node-twitter-api')
-logger.debug('twitter key', TWITTER_CONSUMER_KEY)
-logger.debug('twitter secret', TWITTER_CONSUMER_SECRET)
 const twitter = new twitterAPI({
   consumerKey: TWITTER_CONSUMER_KEY,
   consumerSecret: TWITTER_CONSUMER_SECRET,
@@ -115,10 +117,6 @@ async function getAuth0Token() {
 
 // Send a tweet
 async function tweet(text, identity) {
-  console.log('typeof', typeof identity.access_token)
-  logger.debug('user acces token', identity.access_token)
-  logger.debug('user secret', identity.access_token_secret)
-
   return new Promise((resolve, reject) => {
     twitter.statuses(
       'update',
@@ -154,6 +152,8 @@ async function getUserToken(userId, access_token, token_type) {
 module.exports.privateEndpoint = async (event, context, callback) => {
   const { user_id, message } = JSON.parse(event.body)
 
+  console.log(user_id)
+
   try {
     const auth0token = await getAuth0Token()
     const userToken = await getUserToken(
@@ -162,6 +162,8 @@ module.exports.privateEndpoint = async (event, context, callback) => {
       auth0token.token_type
     )
     const identity = userToken.identities.find(id => id.provider === 'twitter')
+    console.log('Found identity', identity)
+    console.log('ABOUT TO TWEET')
     const tweetResponse = await tweet(message, identity)
 
     callback(null, {
