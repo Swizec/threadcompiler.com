@@ -51,7 +51,7 @@ export default function useTwitterThread() {
     for (let tweet of tweets) {
       try {
         tweet = await renderTweet(tweet)
-        tweet = await sendTweet(tweet)
+        tweet = await sendTweet(tweet.contents)
 
         console.log(tweets)
         console.log(tweet)

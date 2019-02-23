@@ -5,7 +5,7 @@
       "name": "aws-custom-authorizer-auth0"
     },
     "provider": {
-      "stage": "swizec-test",
+      "stage": "swizec-dev",
       "region": "us-west-2",
       "variableSyntax": "\\${([ ~:a-zA-Z0-9._'\",\\-\\/\\(\\)]+?)}",
       "name": "aws",
@@ -15,8 +15,8 @@
         "AUTH0_CLIENT_PUBLIC_KEY": "-----BEGIN CERTIFICATE-----\r\nMIIDCzCCAfOgAwIBAgIJY7bABD60laE/MA0GCSqGSIb3DQEBCwUAMCMxITAfBgNV\r\nBAMTGHRocmVhZGNvbXBpbGVyLmF1dGgwLmNvbTAeFw0xOTAxMTUwMDIwNDZaFw0z\r\nMjA5MjMwMDIwNDZaMCMxITAfBgNVBAMTGHRocmVhZGNvbXBpbGVyLmF1dGgwLmNv\r\nbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKg7kphD+mXP1CZODPtZ\r\nggYWISkKC4tbhYzJm6mKR/vAM61lK5CEkhCAy5WeMWqKLgMyyOIPQ7h7E05v3db/\r\nSr6CnN2AMdbVhN2y4RWVgunYfEXRd7kNnTM+o9/zCECm7pClIGiiO/UfqOIe/l5X\r\nC/v6Drocvauk+53psHVa184BjHm/romTEMcNE1szbDBjrEm0WIwkh7536TMTtP4S\r\n594kqCXDqOVmus1ufyBjgxNNheGD2HCODwNNwktsUc1uDjJ7WULm+w2NY1MdwWdY\r\nteFkaCSO0vOWYjoifNknXz8EJZyX0DzlfbY/KxCM3MEbKnRcUSuwhguzrnTMM9mI\r\nlncCAwEAAaNCMEAwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUdTbKafloYtze\r\nKkkMlHlqK6+tXQEwDgYDVR0PAQH/BAQDAgKEMA0GCSqGSIb3DQEBCwUAA4IBAQCh\r\nIZbi8CgI6myvml093PZhINmNBgFcqjXjDtcmaHcEV6Pijr2w20xVbo6j7GQu3cDJ\r\n862TBMMwVmgFETxq8Tr/ADiZHWN6m3so1O4WNz2RNH1rgzWiTwUrwA1pSsVQpta+\r\neQ45bubpC9wzrbku50Uu0VaZsBAMZKxvx8D6EItANeEzYlUdNyDdzcaijWL1YVnJ\r\nRFxpQKo1ie46bnmGumMH/AgeJaWryaeBvMZGo7wSVFQcPk+SEZOjdxlaaEkqzdPW\r\nq34xFU3Ldskl4zxfxHHsMwS58v0AUkcukT+BSC95puRdcADoRl9Htg035M+KmQsZ\r\ndS++M+W/B7YV9QlIeQVO\r\n-----END CERTIFICATE-----",
         "AUTH0_MGMT_CLIENT_ID": "u52yBEMCsXbQtRJcpYWvmBHLb3fa7CmL",
         "AUTH0_MGMT_CLIENT_SECRET": "u8jZ8yrddxo-6gxF2unSmXGKNsZnkB8EIqvR95LRqLEMWJymTDapMJR6RzV4ioFJ",
-        "TWITTER_CONSUMER_KEY": "w6SzrXXZwbYkPxi1qiO3Qzqot",
-        "TWITTER_CONSUMER_SECRET": "14ZyuGgaMw47GjJYQn9RJulBoUcdOkguBMaMMAMqdQ6zWjWfyZ"
+        "TWITTER_CONSUMER_KEY": "LU7QHNPV2FLijK1T2gGTEU1aj",
+        "TWITTER_CONSUMER_SECRET": "sZtmPjKdXFxXbhRFZpgGo69kRJoL9gLbDgaED3ofSNHTlNkOXB"
       },
       "versionFunctions": true,
       "remoteFunctionData": null,
@@ -30,19 +30,19 @@
           "AuthLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/lambda/aws-custom-authorizer-auth0-swizec-test-auth"
+              "LogGroupName": "/aws/lambda/aws-custom-authorizer-auth0-swizec-dev-auth"
             }
           },
           "PublicEndpointLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/lambda/aws-custom-authorizer-auth0-swizec-test-publicEndpoint"
+              "LogGroupName": "/aws/lambda/aws-custom-authorizer-auth0-swizec-dev-publicEndpoint"
             }
           },
           "PrivateEndpointLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/lambda/aws-custom-authorizer-auth0-swizec-test-privateEndpoint"
+              "LogGroupName": "/aws/lambda/aws-custom-authorizer-auth0-swizec-dev-privateEndpoint"
             }
           },
           "IamRoleLambdaExecution": {
@@ -70,7 +70,7 @@
                     "Fn::Join": [
                       "-",
                       [
-                        "swizec-test",
+                        "swizec-dev",
                         "aws-custom-authorizer-auth0",
                         "lambda"
                       ]
@@ -86,13 +86,13 @@
                         ],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/aws-custom-authorizer-auth0-swizec-test-auth:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/aws-custom-authorizer-auth0-swizec-dev-auth:*"
                           },
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/aws-custom-authorizer-auth0-swizec-test-publicEndpoint:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/aws-custom-authorizer-auth0-swizec-dev-publicEndpoint:*"
                           },
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/aws-custom-authorizer-auth0-swizec-test-privateEndpoint:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/aws-custom-authorizer-auth0-swizec-dev-privateEndpoint:*"
                           }
                         ]
                       },
@@ -103,13 +103,13 @@
                         ],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/aws-custom-authorizer-auth0-swizec-test-auth:*:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/aws-custom-authorizer-auth0-swizec-dev-auth:*:*"
                           },
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/aws-custom-authorizer-auth0-swizec-test-publicEndpoint:*:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/aws-custom-authorizer-auth0-swizec-dev-publicEndpoint:*:*"
                           },
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/aws-custom-authorizer-auth0-swizec-test-privateEndpoint:*:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/aws-custom-authorizer-auth0-swizec-dev-privateEndpoint:*:*"
                           }
                         ]
                       }
@@ -123,7 +123,7 @@
                   "-",
                   [
                     "aws-custom-authorizer-auth0",
-                    "swizec-test",
+                    "swizec-dev",
                     "us-west-2",
                     "lambdaRole"
                   ]
@@ -138,9 +138,9 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/aws-custom-authorizer-auth0/swizec-test/1550819864347-2019-02-22T07:17:44.347Z/aws-custom-authorizer-auth0.zip"
+                "S3Key": "serverless/aws-custom-authorizer-auth0/swizec-dev/1550901134247-2019-02-23T05:52:14.247Z/aws-custom-authorizer-auth0.zip"
               },
-              "FunctionName": "aws-custom-authorizer-auth0-swizec-test-auth",
+              "FunctionName": "aws-custom-authorizer-auth0-swizec-dev-auth",
               "Handler": "handler.auth",
               "MemorySize": 1024,
               "Role": {
@@ -157,8 +157,8 @@
                   "AUTH0_CLIENT_PUBLIC_KEY": "-----BEGIN CERTIFICATE-----\r\nMIIDCzCCAfOgAwIBAgIJY7bABD60laE/MA0GCSqGSIb3DQEBCwUAMCMxITAfBgNV\r\nBAMTGHRocmVhZGNvbXBpbGVyLmF1dGgwLmNvbTAeFw0xOTAxMTUwMDIwNDZaFw0z\r\nMjA5MjMwMDIwNDZaMCMxITAfBgNVBAMTGHRocmVhZGNvbXBpbGVyLmF1dGgwLmNv\r\nbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKg7kphD+mXP1CZODPtZ\r\nggYWISkKC4tbhYzJm6mKR/vAM61lK5CEkhCAy5WeMWqKLgMyyOIPQ7h7E05v3db/\r\nSr6CnN2AMdbVhN2y4RWVgunYfEXRd7kNnTM+o9/zCECm7pClIGiiO/UfqOIe/l5X\r\nC/v6Drocvauk+53psHVa184BjHm/romTEMcNE1szbDBjrEm0WIwkh7536TMTtP4S\r\n594kqCXDqOVmus1ufyBjgxNNheGD2HCODwNNwktsUc1uDjJ7WULm+w2NY1MdwWdY\r\nteFkaCSO0vOWYjoifNknXz8EJZyX0DzlfbY/KxCM3MEbKnRcUSuwhguzrnTMM9mI\r\nlncCAwEAAaNCMEAwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUdTbKafloYtze\r\nKkkMlHlqK6+tXQEwDgYDVR0PAQH/BAQDAgKEMA0GCSqGSIb3DQEBCwUAA4IBAQCh\r\nIZbi8CgI6myvml093PZhINmNBgFcqjXjDtcmaHcEV6Pijr2w20xVbo6j7GQu3cDJ\r\n862TBMMwVmgFETxq8Tr/ADiZHWN6m3so1O4WNz2RNH1rgzWiTwUrwA1pSsVQpta+\r\neQ45bubpC9wzrbku50Uu0VaZsBAMZKxvx8D6EItANeEzYlUdNyDdzcaijWL1YVnJ\r\nRFxpQKo1ie46bnmGumMH/AgeJaWryaeBvMZGo7wSVFQcPk+SEZOjdxlaaEkqzdPW\r\nq34xFU3Ldskl4zxfxHHsMwS58v0AUkcukT+BSC95puRdcADoRl9Htg035M+KmQsZ\r\ndS++M+W/B7YV9QlIeQVO\r\n-----END CERTIFICATE-----",
                   "AUTH0_MGMT_CLIENT_ID": "u52yBEMCsXbQtRJcpYWvmBHLb3fa7CmL",
                   "AUTH0_MGMT_CLIENT_SECRET": "u8jZ8yrddxo-6gxF2unSmXGKNsZnkB8EIqvR95LRqLEMWJymTDapMJR6RzV4ioFJ",
-                  "TWITTER_CONSUMER_KEY": "w6SzrXXZwbYkPxi1qiO3Qzqot",
-                  "TWITTER_CONSUMER_SECRET": "14ZyuGgaMw47GjJYQn9RJulBoUcdOkguBMaMMAMqdQ6zWjWfyZ"
+                  "TWITTER_CONSUMER_KEY": "LU7QHNPV2FLijK1T2gGTEU1aj",
+                  "TWITTER_CONSUMER_SECRET": "sZtmPjKdXFxXbhRFZpgGo69kRJoL9gLbDgaED3ofSNHTlNkOXB"
                 }
               }
             },
@@ -167,14 +167,14 @@
               "IamRoleLambdaExecution"
             ]
           },
-          "AuthLambdaVersionhUU1A0nQXagEQtH1t1g4GZgTtsMCvXhwHu3WEIRluyA": {
+          "AuthLambdaVersionqhEYkUSxS2HvVwCx4IMeVveSCtEGQ5p6gEoGZZFM4": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AuthLambdaFunction"
               },
-              "CodeSha256": "fEcDR5z1XG0sEPIdhXvsCn4HwD7cQOBemgIieAwJAms="
+              "CodeSha256": "zIMem8rAClw+foxHOkpwyGJXCJUMxwnotFAe5+gPCnU="
             }
           },
           "PublicEndpointLambdaFunction": {
@@ -184,9 +184,9 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/aws-custom-authorizer-auth0/swizec-test/1550819864347-2019-02-22T07:17:44.347Z/aws-custom-authorizer-auth0.zip"
+                "S3Key": "serverless/aws-custom-authorizer-auth0/swizec-dev/1550901134247-2019-02-23T05:52:14.247Z/aws-custom-authorizer-auth0.zip"
               },
-              "FunctionName": "aws-custom-authorizer-auth0-swizec-test-publicEndpoint",
+              "FunctionName": "aws-custom-authorizer-auth0-swizec-dev-publicEndpoint",
               "Handler": "handler.publicEndpoint",
               "MemorySize": 1024,
               "Role": {
@@ -203,8 +203,8 @@
                   "AUTH0_CLIENT_PUBLIC_KEY": "-----BEGIN CERTIFICATE-----\r\nMIIDCzCCAfOgAwIBAgIJY7bABD60laE/MA0GCSqGSIb3DQEBCwUAMCMxITAfBgNV\r\nBAMTGHRocmVhZGNvbXBpbGVyLmF1dGgwLmNvbTAeFw0xOTAxMTUwMDIwNDZaFw0z\r\nMjA5MjMwMDIwNDZaMCMxITAfBgNVBAMTGHRocmVhZGNvbXBpbGVyLmF1dGgwLmNv\r\nbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKg7kphD+mXP1CZODPtZ\r\nggYWISkKC4tbhYzJm6mKR/vAM61lK5CEkhCAy5WeMWqKLgMyyOIPQ7h7E05v3db/\r\nSr6CnN2AMdbVhN2y4RWVgunYfEXRd7kNnTM+o9/zCECm7pClIGiiO/UfqOIe/l5X\r\nC/v6Drocvauk+53psHVa184BjHm/romTEMcNE1szbDBjrEm0WIwkh7536TMTtP4S\r\n594kqCXDqOVmus1ufyBjgxNNheGD2HCODwNNwktsUc1uDjJ7WULm+w2NY1MdwWdY\r\nteFkaCSO0vOWYjoifNknXz8EJZyX0DzlfbY/KxCM3MEbKnRcUSuwhguzrnTMM9mI\r\nlncCAwEAAaNCMEAwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUdTbKafloYtze\r\nKkkMlHlqK6+tXQEwDgYDVR0PAQH/BAQDAgKEMA0GCSqGSIb3DQEBCwUAA4IBAQCh\r\nIZbi8CgI6myvml093PZhINmNBgFcqjXjDtcmaHcEV6Pijr2w20xVbo6j7GQu3cDJ\r\n862TBMMwVmgFETxq8Tr/ADiZHWN6m3so1O4WNz2RNH1rgzWiTwUrwA1pSsVQpta+\r\neQ45bubpC9wzrbku50Uu0VaZsBAMZKxvx8D6EItANeEzYlUdNyDdzcaijWL1YVnJ\r\nRFxpQKo1ie46bnmGumMH/AgeJaWryaeBvMZGo7wSVFQcPk+SEZOjdxlaaEkqzdPW\r\nq34xFU3Ldskl4zxfxHHsMwS58v0AUkcukT+BSC95puRdcADoRl9Htg035M+KmQsZ\r\ndS++M+W/B7YV9QlIeQVO\r\n-----END CERTIFICATE-----",
                   "AUTH0_MGMT_CLIENT_ID": "u52yBEMCsXbQtRJcpYWvmBHLb3fa7CmL",
                   "AUTH0_MGMT_CLIENT_SECRET": "u8jZ8yrddxo-6gxF2unSmXGKNsZnkB8EIqvR95LRqLEMWJymTDapMJR6RzV4ioFJ",
-                  "TWITTER_CONSUMER_KEY": "w6SzrXXZwbYkPxi1qiO3Qzqot",
-                  "TWITTER_CONSUMER_SECRET": "14ZyuGgaMw47GjJYQn9RJulBoUcdOkguBMaMMAMqdQ6zWjWfyZ"
+                  "TWITTER_CONSUMER_KEY": "LU7QHNPV2FLijK1T2gGTEU1aj",
+                  "TWITTER_CONSUMER_SECRET": "sZtmPjKdXFxXbhRFZpgGo69kRJoL9gLbDgaED3ofSNHTlNkOXB"
                 }
               }
             },
@@ -213,14 +213,14 @@
               "IamRoleLambdaExecution"
             ]
           },
-          "PublicEndpointLambdaVersionb6JfWuHnJkpimQ9J0Zdoo48ewwTdZErNmmGQqsO4GvY": {
+          "PublicEndpointLambdaVersionFstgmuL0h1D4zPCB3NB7RAjwADArjApfjNT8vACR9c": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "PublicEndpointLambdaFunction"
               },
-              "CodeSha256": "fEcDR5z1XG0sEPIdhXvsCn4HwD7cQOBemgIieAwJAms="
+              "CodeSha256": "zIMem8rAClw+foxHOkpwyGJXCJUMxwnotFAe5+gPCnU="
             }
           },
           "PrivateEndpointLambdaFunction": {
@@ -230,9 +230,9 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/aws-custom-authorizer-auth0/swizec-test/1550819864347-2019-02-22T07:17:44.347Z/aws-custom-authorizer-auth0.zip"
+                "S3Key": "serverless/aws-custom-authorizer-auth0/swizec-dev/1550901134247-2019-02-23T05:52:14.247Z/aws-custom-authorizer-auth0.zip"
               },
-              "FunctionName": "aws-custom-authorizer-auth0-swizec-test-privateEndpoint",
+              "FunctionName": "aws-custom-authorizer-auth0-swizec-dev-privateEndpoint",
               "Handler": "handler.privateEndpoint",
               "MemorySize": 1024,
               "Role": {
@@ -249,8 +249,8 @@
                   "AUTH0_CLIENT_PUBLIC_KEY": "-----BEGIN CERTIFICATE-----\r\nMIIDCzCCAfOgAwIBAgIJY7bABD60laE/MA0GCSqGSIb3DQEBCwUAMCMxITAfBgNV\r\nBAMTGHRocmVhZGNvbXBpbGVyLmF1dGgwLmNvbTAeFw0xOTAxMTUwMDIwNDZaFw0z\r\nMjA5MjMwMDIwNDZaMCMxITAfBgNVBAMTGHRocmVhZGNvbXBpbGVyLmF1dGgwLmNv\r\nbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKg7kphD+mXP1CZODPtZ\r\nggYWISkKC4tbhYzJm6mKR/vAM61lK5CEkhCAy5WeMWqKLgMyyOIPQ7h7E05v3db/\r\nSr6CnN2AMdbVhN2y4RWVgunYfEXRd7kNnTM+o9/zCECm7pClIGiiO/UfqOIe/l5X\r\nC/v6Drocvauk+53psHVa184BjHm/romTEMcNE1szbDBjrEm0WIwkh7536TMTtP4S\r\n594kqCXDqOVmus1ufyBjgxNNheGD2HCODwNNwktsUc1uDjJ7WULm+w2NY1MdwWdY\r\nteFkaCSO0vOWYjoifNknXz8EJZyX0DzlfbY/KxCM3MEbKnRcUSuwhguzrnTMM9mI\r\nlncCAwEAAaNCMEAwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUdTbKafloYtze\r\nKkkMlHlqK6+tXQEwDgYDVR0PAQH/BAQDAgKEMA0GCSqGSIb3DQEBCwUAA4IBAQCh\r\nIZbi8CgI6myvml093PZhINmNBgFcqjXjDtcmaHcEV6Pijr2w20xVbo6j7GQu3cDJ\r\n862TBMMwVmgFETxq8Tr/ADiZHWN6m3so1O4WNz2RNH1rgzWiTwUrwA1pSsVQpta+\r\neQ45bubpC9wzrbku50Uu0VaZsBAMZKxvx8D6EItANeEzYlUdNyDdzcaijWL1YVnJ\r\nRFxpQKo1ie46bnmGumMH/AgeJaWryaeBvMZGo7wSVFQcPk+SEZOjdxlaaEkqzdPW\r\nq34xFU3Ldskl4zxfxHHsMwS58v0AUkcukT+BSC95puRdcADoRl9Htg035M+KmQsZ\r\ndS++M+W/B7YV9QlIeQVO\r\n-----END CERTIFICATE-----",
                   "AUTH0_MGMT_CLIENT_ID": "u52yBEMCsXbQtRJcpYWvmBHLb3fa7CmL",
                   "AUTH0_MGMT_CLIENT_SECRET": "u8jZ8yrddxo-6gxF2unSmXGKNsZnkB8EIqvR95LRqLEMWJymTDapMJR6RzV4ioFJ",
-                  "TWITTER_CONSUMER_KEY": "w6SzrXXZwbYkPxi1qiO3Qzqot",
-                  "TWITTER_CONSUMER_SECRET": "14ZyuGgaMw47GjJYQn9RJulBoUcdOkguBMaMMAMqdQ6zWjWfyZ"
+                  "TWITTER_CONSUMER_KEY": "LU7QHNPV2FLijK1T2gGTEU1aj",
+                  "TWITTER_CONSUMER_SECRET": "sZtmPjKdXFxXbhRFZpgGo69kRJoL9gLbDgaED3ofSNHTlNkOXB"
                 }
               }
             },
@@ -259,20 +259,20 @@
               "IamRoleLambdaExecution"
             ]
           },
-          "PrivateEndpointLambdaVersionrcffsl9I8rY8SWpEw9zqJFgohOJqmHqXKCgY2GAdhoI": {
+          "PrivateEndpointLambdaVersionHe41lQEMQv0gpx1jlXBY9Oe45mylKdl4lGkKBVi39I": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "PrivateEndpointLambdaFunction"
               },
-              "CodeSha256": "fEcDR5z1XG0sEPIdhXvsCn4HwD7cQOBemgIieAwJAms="
+              "CodeSha256": "zIMem8rAClw+foxHOkpwyGJXCJUMxwnotFAe5+gPCnU="
             }
           },
           "ApiGatewayRestApi": {
             "Type": "AWS::ApiGateway::RestApi",
             "Properties": {
-              "Name": "swizec-test-aws-custom-authorizer-auth0",
+              "Name": "swizec-dev-aws-custom-authorizer-auth0",
               "EndpointConfiguration": {
                 "Types": [
                   "EDGE"
@@ -537,13 +537,13 @@
               "Type": "TOKEN"
             }
           },
-          "ApiGatewayDeployment1550819864465": {
+          "ApiGatewayDeployment1550901134408": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               },
-              "StageName": "swizec-test"
+              "StageName": "swizec-dev"
             },
             "DependsOn": [
               "ApiGatewayMethodApiPublicOptions",
@@ -707,19 +707,19 @@
           "AuthLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AuthLambdaVersionhUU1A0nQXagEQtH1t1g4GZgTtsMCvXhwHu3WEIRluyA"
+              "Ref": "AuthLambdaVersionqhEYkUSxS2HvVwCx4IMeVveSCtEGQ5p6gEoGZZFM4"
             }
           },
           "PublicEndpointLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "PublicEndpointLambdaVersionb6JfWuHnJkpimQ9J0Zdoo48ewwTdZErNmmGQqsO4GvY"
+              "Ref": "PublicEndpointLambdaVersionFstgmuL0h1D4zPCB3NB7RAjwADArjApfjNT8vACR9c"
             }
           },
           "PrivateEndpointLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "PrivateEndpointLambdaVersionrcffsl9I8rY8SWpEw9zqJFgohOJqmHqXKCgY2GAdhoI"
+              "Ref": "PrivateEndpointLambdaVersionHe41lQEMQv0gpx1jlXBY9Oe45mylKdl4lGkKBVi39I"
             }
           },
           "ServiceEndpoint": {
@@ -736,7 +736,7 @@
                   {
                     "Ref": "AWS::URLSuffix"
                   },
-                  "/swizec-test"
+                  "/swizec-dev"
                 ]
               ]
             }
@@ -770,7 +770,7 @@
         "handler": "handler.auth",
         "cors": true,
         "events": [],
-        "name": "aws-custom-authorizer-auth0-swizec-test-auth",
+        "name": "aws-custom-authorizer-auth0-swizec-dev-auth",
         "package": {},
         "memory": 1024,
         "timeout": 6,
@@ -807,7 +807,7 @@
             }
           }
         ],
-        "name": "aws-custom-authorizer-auth0-swizec-test-publicEndpoint",
+        "name": "aws-custom-authorizer-auth0-swizec-dev-publicEndpoint",
         "package": {},
         "memory": 1024,
         "timeout": 6,
@@ -854,7 +854,7 @@
             }
           }
         ],
-        "name": "aws-custom-authorizer-auth0-swizec-test-privateEndpoint",
+        "name": "aws-custom-authorizer-auth0-swizec-dev-privateEndpoint",
         "package": {},
         "memory": 1024,
         "timeout": 6,
@@ -898,7 +898,7 @@
     "artifact": "/Users/Swizec/Documents/random-coding/threadcompiler.com/backend/.serverless/aws-custom-authorizer-auth0.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/aws-custom-authorizer-auth0/swizec-test/1550819864347-2019-02-22T07:17:44.347Z",
+    "artifactDirectoryName": "serverless/aws-custom-authorizer-auth0/swizec-dev/1550901134247-2019-02-23T05:52:14.247Z",
     "artifact": "aws-custom-authorizer-auth0.zip"
   }
 }
