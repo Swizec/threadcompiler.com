@@ -116,12 +116,13 @@ async function getAuth0Token() {
 }
 
 // Send a tweet
-async function tweet(text, identity) {
+async function tweet({ message, in_reply_to_status_id }, identity) {
   return new Promise((resolve, reject) => {
     twitter.statuses(
       'update',
       {
-        status: text,
+        status: message,
+        in_reply_to_status_id,
       },
       identity.access_token,
       identity.access_token_secret,
@@ -150,7 +151,7 @@ async function getUserToken(userId, access_token, token_type) {
 
 // Private API -- tweets stuff
 module.exports.privateEndpoint = async (event, context, callback) => {
-  const { user_id, message } = JSON.parse(event.body)
+  const { user_id, message, in_reply_to_status_id } = JSON.parse(event.body)
 
   console.log(user_id)
 
@@ -164,7 +165,13 @@ module.exports.privateEndpoint = async (event, context, callback) => {
     const identity = userToken.identities.find(id => id.provider === 'twitter')
     console.log('Found identity', identity)
     console.log('ABOUT TO TWEET')
-    const tweetResponse = await tweet(message, identity)
+    const tweetResponse = await tweet(
+      {
+        message,
+        in_reply_to_status_id,
+      },
+      identity
+    )
 
     callback(null, {
       statusCode: 200,

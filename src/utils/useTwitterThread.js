@@ -14,7 +14,7 @@ class APIError extends Error {
   }
 }
 
-const sendTweet = async tweet => {
+const sendTweet = async (tweet, replyToId) => {
   const token = auth.getToken()
 
   try {
@@ -25,6 +25,7 @@ const sendTweet = async tweet => {
       body: {
         user_id: auth.getUser().sub,
         message: tweet,
+        in_reply_to_status_id: replyToId,
       },
     })
     const { data, statusCode } = res
@@ -46,15 +47,18 @@ export default function useTwitterThread() {
   const { input } = useContext(ThreadContainer.Context)
 
   async function sendTweets() {
-    const tweets = input.split('---')
+    const inputTweets = input.split('---')
+    let prevTweet = null
 
-    for (let tweet of tweets) {
+    for (let tweet of inputTweets) {
       try {
         tweet = await renderTweet(tweet)
-        tweet = await sendTweet(tweet.contents)
+        tweet = await sendTweet(
+          tweet.contents,
+          prevTweet ? prevTweet.id_str : ''
+        )
 
-        console.log(tweets)
-        console.log(tweet)
+        prevTweet = tweet
 
         setTweets([...tweets, tweet])
         setSuccess(true)
